@@ -6,9 +6,7 @@ import type { AppRoute } from '@/routes/routes';
 import { Language } from '@/types/i18n';
 import type { TranslationResource } from '@/types/translation';
 
-const DEFAULT_SITE_URL = 'http://localhost:8080';
-
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL;
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 
 const TRANSLATIONS: Readonly<Record<Language, TranslationResource>> = {
   [Language.SK]: sk,
