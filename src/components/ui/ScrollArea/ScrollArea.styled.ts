@@ -14,7 +14,6 @@ export const ScrollAreaRoot = styled(Box, {
 })<ScrollAreaRootProps>(({ theme, areaMaxHeight }) => ({
   maxHeight: areaMaxHeight,
   overflowY: 'auto',
-  overscrollBehavior: 'contain',
   paddingRight: theme.spacing(1.5),
   scrollbarWidth: 'thin',
   scrollbarColor: `${COLORS.border} transparent`,

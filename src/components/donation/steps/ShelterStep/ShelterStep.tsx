@@ -11,7 +11,6 @@ import { ToggleGroupButtons } from '@/components/ui/ToggleGroupButtons/ToggleGro
 import {
   AMOUNT_PRESETS,
   MAX_AMOUNT,
-  MAX_AMOUNT_DECIMALS,
   MIN_AMOUNT,
 } from '@/components/donation/DonationForm/constants';
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
@@ -20,9 +19,8 @@ import { DonationType, type DonationFormValues } from '@/types/donation';
 import type { TranslateFn } from '@/types/i18n';
 import type { SheltersState } from '@/types/shelters';
 import type { ToggleOption } from '@/types/ui';
+import { CURRENCY_SYMBOL, MAX_AMOUNT_DECIMALS } from '@/utils/format';
 import { translateFieldError } from '@/utils/translateFieldError';
-
-const CURRENCY_SYMBOL = '€';
 
 type ShelterStepProps = {
   readonly t: TranslateFn;

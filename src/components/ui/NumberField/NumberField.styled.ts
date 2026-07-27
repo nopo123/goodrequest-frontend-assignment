@@ -3,14 +3,10 @@ import InputBase from '@mui/material/InputBase';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
-import { COLORS } from '@/lib/theme/tokens';
+import { COLORS, SPACING } from '@/lib/theme/tokens';
 import { pxToRem } from '@/lib/theme/typography';
 
-const UNIT_GAP = 10;
-
 const MIN_FIELD_WIDTH = 50;
-
-const HORIZONTAL_PADDING = 20;
 
 type NumberFieldRowProps = {
   readonly hasError: boolean;
@@ -26,11 +22,11 @@ export const NumberFieldRow = styled(Box, {
   display: 'flex',
   alignItems: 'baseline',
   justifyContent: 'center',
-  gap: UNIT_GAP,
+  gap: SPACING.lg,
   minWidth: MIN_FIELD_WIDTH,
   maxWidth: '100%',
-  paddingLeft: HORIZONTAL_PADDING,
-  paddingRight: HORIZONTAL_PADDING,
+  paddingLeft: SPACING.xl2,
+  paddingRight: SPACING.xl2,
   paddingBottom: theme.spacing(2),
   borderBottom: `2px solid ${
     hasError ? theme.palette.error.main : theme.palette.primary.main

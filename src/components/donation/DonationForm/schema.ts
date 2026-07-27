@@ -2,6 +2,7 @@ import { isValidPhoneNumber } from 'libphonenumber-js';
 import { z } from 'zod';
 
 import { DonationType, PhoneCountry } from '@/types/donation';
+import { MAX_AMOUNT_DECIMALS } from '@/utils/format';
 
 import {
   FIRST_NAME_MAX_LENGTH,
@@ -9,7 +10,7 @@ import {
   LAST_NAME_MAX_LENGTH,
   LAST_NAME_MIN_LENGTH,
   MAX_AMOUNT,
-  MAX_AMOUNT_DECIMALS,
+  MAX_DONORS,
   MIN_AMOUNT,
   PHONE_COUNTRY_CALLING_CODES,
 } from './constants';
@@ -87,7 +88,7 @@ export const donationSchema = z
     donationType: z.enum(DonationType),
     shelterId: z.number().nullable(),
     amount: z.string(),
-    donors: z.array(donorSchema).min(1),
+    donors: z.array(donorSchema).min(1).max(MAX_DONORS),
     consent: z.literal(true, { message: 'validation.consent.required' }),
   })
   .superRefine((values, ctx) => {

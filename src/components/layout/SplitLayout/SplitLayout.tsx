@@ -9,15 +9,9 @@ import {
   PrimaryColumn,
   SplitGrid,
 } from '@/components/ui/layout/layout.styled';
-import { CONTENT_MAX_WIDTH, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
+import { CONTENT_MAX_WIDTH, SPACING, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
 
-const DEFAULT_CONTENT_VERTICAL_PADDING = 60;
-
-const PAGE_EDGE_PADDING = 20;
-
-const PAGE_HORIZONTAL_PADDING = 80;
-
-const FULL_HEIGHT = `calc(100vh - ${PAGE_EDGE_PADDING * 2}px)`;
+const FULL_HEIGHT = `calc(100vh - ${SPACING.xl2 * 2}px)`;
 
 type SplitLayoutProps = {
   readonly children: ReactNode;
@@ -32,7 +26,7 @@ export const SplitLayout = ({
   aside,
   footer,
   asideWidth,
-  contentVerticalPadding = DEFAULT_CONTENT_VERTICAL_PADDING,
+  contentVerticalPadding = SPACING.xl6,
 }: SplitLayoutProps) => {
   const hasAside = aside !== undefined;
 
@@ -52,14 +46,14 @@ export const SplitLayout = ({
       disableGutters
       sx={{
         maxWidth: {
-          xs: CONTENT_MAX_WIDTH + PAGE_EDGE_PADDING * 2,
-          md: CONTENT_MAX_WIDTH + PAGE_HORIZONTAL_PADDING * 2,
+          xs: CONTENT_MAX_WIDTH + SPACING.xl2 * 2,
+          md: CONTENT_MAX_WIDTH + SPACING.xl8 * 2,
         },
         px: {
-          xs: `${PAGE_EDGE_PADDING}px`,
-          md: `${PAGE_HORIZONTAL_PADDING}px`,
+          xs: `${SPACING.xl2}px`,
+          md: `${SPACING.xl8}px`,
         },
-        py: `${PAGE_EDGE_PADDING}px`,
+        py: `${SPACING.xl2}px`,
       }}
     >
       {hasAside ? (

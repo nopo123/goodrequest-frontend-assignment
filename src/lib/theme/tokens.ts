@@ -2,6 +2,7 @@ export const COLORS = {
   primary: '#4F46E5',
   primaryDark: '#4338CA',
   primaryLight: '#EEF2FF',
+  onPrimary: '#FFFFFF',
   textPrimary: '#111827',
   textSecondary: '#374151',
   textTertiary: '#4B5563',
@@ -47,9 +48,14 @@ export const BREAKPOINTS = {
 export const SPACING_UNIT = 8;
 
 export const SPACING = {
+  xs: 4,
   md: 8,
+  lg: 10,
+  xl: 16,
   xl2: 20,
+  xl6: 60,
   xl7: 64,
+  xl8: 80,
 } as const;
 
 export const CONTENT_MAX_WIDTH = 1440;

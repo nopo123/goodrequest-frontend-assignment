@@ -31,7 +31,7 @@ export const muiTheme = createTheme({
       main: COLORS.primary,
       dark: COLORS.primaryDark,
       light: COLORS.primaryLight,
-      contrastText: '#FFFFFF',
+      contrastText: COLORS.onPrimary,
     },
     error: {
       main: COLORS.error,
@@ -95,7 +95,7 @@ export const muiTheme = createTheme({
     MuiToggleButtonGroup: {
       styleOverrides: {
         root: {
-          gap: 8,
+          gap: SPACING.md,
         },
         grouped: {
           border: 0,
@@ -117,7 +117,7 @@ export const muiTheme = createTheme({
           },
           '&.Mui-selected': {
             backgroundColor: COLORS.primary,
-            color: '#FFFFFF',
+            color: COLORS.onPrimary,
             '&:hover': {
               backgroundColor: COLORS.primaryDark,
             },
@@ -233,7 +233,7 @@ export const muiTheme = createTheme({
             color: COLORS.primary,
             borderColor: COLORS.primary,
             '& .MuiStepIcon-text': {
-              fill: '#FFFFFF',
+              fill: COLORS.onPrimary,
             },
           },
           '&.Mui-completed': {

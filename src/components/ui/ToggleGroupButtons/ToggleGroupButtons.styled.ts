@@ -1,10 +1,8 @@
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
 
-import { COLORS, RADII } from '@/lib/theme/tokens';
+import { COLORS, RADII, SPACING } from '@/lib/theme/tokens';
 import type { ToggleGroupColumns } from '@/types/ui';
-
-const FRAME_PADDING = 4;
 
 type ToggleGroupRootProps = {
   readonly columns?: ToggleGroupColumns;
@@ -19,19 +17,19 @@ export const ToggleGroupRoot = styled(ToggleButtonGroup, {
 })<ToggleGroupRootProps>(({ theme, columns, framed, pill, groupHeight }) => ({
   minHeight: groupHeight,
   '& .MuiToggleButton-root': {
-    minHeight: framed ? groupHeight - FRAME_PADDING * 2 : groupHeight,
+    minHeight: framed ? groupHeight - SPACING.xs * 2 : groupHeight,
     paddingTop: 0,
     paddingBottom: 0,
   },
   ...(framed
     ? {
         gap: 0,
-        padding: FRAME_PADDING,
+        padding: SPACING.xs,
         border: `1px solid ${COLORS.border}`,
         borderRadius: pill ? RADII.pill : RADII.md,
         backgroundColor: COLORS.surface,
         '& .MuiToggleButton-root': {
-          minHeight: groupHeight - FRAME_PADDING * 2,
+          minHeight: groupHeight - SPACING.xs * 2,
           paddingTop: 0,
           paddingBottom: 0,
           backgroundColor: 'transparent',

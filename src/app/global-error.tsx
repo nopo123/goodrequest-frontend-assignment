@@ -44,7 +44,7 @@ const buttonStyle: CSSProperties = {
   borderRadius: RADII.sm,
   cursor: 'pointer',
   backgroundColor: COLORS.primary,
-  color: '#FFFFFF',
+  color: COLORS.onPrimary,
 };
 
 const linkStyle: CSSProperties = {
