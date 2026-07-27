@@ -27,6 +27,7 @@ export const sk = {
     typeSpecific: 'Prispieť konkrétnemu útulku',
     typeGeneral: 'Prispieť celej nadácii',
     typeLegend: 'Forma pomoci',
+    projectSectionTitle: 'O projekte',
     shelterLabel: 'Útulok',
     shelterPlaceholder: 'Vyberte útulok zo zoznamu',
     shelterEmpty: 'Žiadny útulok nezodpovedá hľadaniu',
@@ -142,11 +143,6 @@ export const sk = {
     aboutTitle: 'O projekte',
     aboutDescription:
       'Nadácia Good Boy zachraňuje opustené a týrané psy v Žiline a hľadá im milujúci domov',
-  },
-  language: {
-    label: 'Jazyk',
-    sk: 'Slovenčina',
-    en: 'English',
   },
   imageAlt: {
     dogOnBeach: 'Šteňa kokršpaniela sediace na piesočnatej pláži',

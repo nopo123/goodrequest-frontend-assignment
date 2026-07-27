@@ -29,6 +29,7 @@ export const en: TranslationResource = {
     typeSpecific: "Donate to a specific shelter",
     typeGeneral: "Donate to the whole foundation",
     typeLegend: "Type of donation",
+    projectSectionTitle: "About the project",
     shelterLabel: "Shelter",
     shelterPlaceholder: "Pick a shelter from the list",
     shelterEmpty: "No shelter matches your search",
@@ -145,11 +146,6 @@ export const en: TranslationResource = {
     aboutTitle: "About",
     aboutDescription:
       "The Good Boy foundation rescues abandoned and abused dogs in Žilina and finds them a loving home",
-  },
-  language: {
-    label: "Language",
-    sk: "Slovenčina",
-    en: "English",
   },
   imageAlt: {
     dogOnBeach: "A cocker spaniel puppy sitting on a sandy beach",

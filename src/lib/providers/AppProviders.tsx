@@ -1,16 +1,16 @@
 'use client';
 
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
-import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { SnackbarProvider } from 'notistack';
 import type { ReactNode } from 'react';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import { I18nProvider } from '../i18n/I18nProvider';
 import { QueryProvider } from '../query/QueryProvider';
-import { GlobalStyle } from '../theme/GlobalStyle';
-import { StyledComponentsRegistry } from '../theme/StyledComponentsRegistry';
 import { muiTheme } from '../theme/mui-theme';
-import { designTokens } from '../theme/tokens';
+
+const SNACKBAR_AUTO_HIDE_MS = 5000;
 
 type AppProvidersProps = {
   readonly children: ReactNode;
@@ -18,15 +18,17 @@ type AppProvidersProps = {
 
 export const AppProviders = ({ children }: AppProvidersProps) => (
   <AppRouterCacheProvider options={{ key: 'mui' }}>
-    <StyledComponentsRegistry>
-      <MuiThemeProvider theme={muiTheme}>
-        <StyledThemeProvider theme={designTokens}>
-          <GlobalStyle />
-          <QueryProvider>
-            <I18nProvider>{children}</I18nProvider>
-          </QueryProvider>
-        </StyledThemeProvider>
-      </MuiThemeProvider>
-    </StyledComponentsRegistry>
+    <ThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <SnackbarProvider
+        maxSnack={3}
+        autoHideDuration={SNACKBAR_AUTO_HIDE_MS}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <QueryProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </QueryProvider>
+      </SnackbarProvider>
+    </ThemeProvider>
   </AppRouterCacheProvider>
 );

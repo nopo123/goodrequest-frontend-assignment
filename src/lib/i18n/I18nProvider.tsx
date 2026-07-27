@@ -3,11 +3,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { I18nextProvider } from 'react-i18next';
 
-import {
-  LANGUAGE_STORAGE_KEY,
-  initI18n,
-  isSupportedLanguage,
-} from './config';
+import { initI18n, resolveBrowserLanguage } from './config';
 
 type I18nProviderProps = {
   readonly children: ReactNode;
@@ -17,12 +13,10 @@ export const I18nProvider = ({ children }: I18nProviderProps) => {
   const [instance] = useState(initI18n);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    const shouldRestore =
-      stored !== null && isSupportedLanguage(stored) && stored !== instance.language;
+    const browserLanguage = resolveBrowserLanguage();
 
-    if (shouldRestore) {
-      void instance.changeLanguage(stored);
+    if (browserLanguage !== instance.language) {
+      void instance.changeLanguage(browserLanguage);
     }
   }, [instance]);
 

@@ -1,0 +1,62 @@
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { styled } from '@mui/material/styles';
+
+import { COLORS, RADII } from '@/lib/theme/tokens';
+import type { ToggleGroupColumns } from '@/types/ui';
+
+const FRAME_PADDING = 4;
+
+type ToggleGroupRootProps = {
+  readonly columns?: ToggleGroupColumns;
+  readonly framed: boolean;
+  readonly pill: boolean;
+  readonly groupHeight: number;
+};
+
+export const ToggleGroupRoot = styled(ToggleButtonGroup, {
+  shouldForwardProp: (prop) =>
+    prop !== 'columns' &&
+    prop !== 'framed' &&
+    prop !== 'pill' &&
+    prop !== 'groupHeight',
+})<ToggleGroupRootProps>(({ theme, columns, framed, pill, groupHeight }) => ({
+  minHeight: groupHeight,
+  '& .MuiToggleButton-root': {
+    minHeight: framed ? groupHeight - FRAME_PADDING * 2 : groupHeight,
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  ...(framed
+    ? {
+        gap: 0,
+        padding: FRAME_PADDING,
+        border: `1px solid ${COLORS.border}`,
+        borderRadius: pill ? RADII.pill : RADII.md,
+        backgroundColor: COLORS.surface,
+        '& .MuiToggleButton-root': {
+          minHeight: groupHeight - FRAME_PADDING * 2,
+          paddingTop: 0,
+          paddingBottom: 0,
+          backgroundColor: 'transparent',
+          '&:hover': {
+            backgroundColor: COLORS.surfaceMuted,
+          },
+          '&.Mui-selected': {
+            backgroundColor: COLORS.primary,
+            '&:hover': {
+              backgroundColor: COLORS.primaryDark,
+            },
+          },
+        },
+      }
+    : null),
+  ...(columns
+    ? {
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns.xs ?? 1}, minmax(0, 1fr))`,
+        [theme.breakpoints.up('sm')]: {
+          gridTemplateColumns: `repeat(${columns.sm ?? columns.xs ?? 1}, minmax(0, 1fr))`,
+        },
+      }
+    : null),
+}));
