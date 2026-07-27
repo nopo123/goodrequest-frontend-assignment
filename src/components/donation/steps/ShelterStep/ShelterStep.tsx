@@ -3,7 +3,6 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { FormikErrors, FormikTouched } from 'formik';
-import { useTranslation } from 'react-i18next';
 
 import { AmountPicker } from '@/components/donation/AmountPicker/AmountPicker';
 import { ShelterAutocomplete } from '@/components/donation/ShelterAutocomplete/ShelterAutocomplete';
@@ -15,13 +14,17 @@ import {
 } from '@/components/donation/DonationForm/constants';
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
 import { parseAmount } from '@/components/donation/DonationForm/payload';
-import { useTranslateFieldError } from '@/hooks/form/useTranslateFieldError';
 import { DonationType, type DonationFormValues } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
+import type { SheltersState } from '@/types/shelters';
 import type { ToggleOption } from '@/types/ui';
+import { translateFieldError } from '@/utils/translateFieldError';
 
 const CURRENCY_SYMBOL = '€';
 
 type ShelterStepProps = {
+  readonly t: TranslateFn;
+  readonly shelters: SheltersState;
   readonly values: DonationFormValues;
   readonly errors: FormikErrors<DonationFormValues>;
   readonly touched: FormikTouched<DonationFormValues>;
@@ -32,6 +35,8 @@ type ShelterStepProps = {
 };
 
 export const ShelterStep = ({
+  t,
+  shelters,
   values,
   errors,
   touched,
@@ -40,9 +45,6 @@ export const ShelterStep = ({
   onAmountChange,
   onFieldBlur,
 }: ShelterStepProps) => {
-  const { t } = useTranslation();
-  const translateError = useTranslateFieldError();
-
   const typeOptions: readonly ToggleOption<DonationType>[] = [
     { value: DonationType.SPECIFIC_SHELTER, label: t('shelterStep.typeSpecific') },
     { value: DonationType.WHOLE_FOUNDATION, label: t('shelterStep.typeGeneral') },
@@ -72,8 +74,13 @@ export const ShelterStep = ({
         </Typography>
 
         <ShelterAutocomplete
+          t={t}
+          shelters={shelters}
           value={values.shelterId}
-          error={translateError(getDonationFieldError(errors, touched, 'shelterId'))}
+          error={translateFieldError(
+            t,
+            getDonationFieldError(errors, touched, 'shelterId'),
+          )}
           isRequired={isShelterRequired}
           onChange={onShelterChange}
           onBlur={() => onFieldBlur('shelterId')}
@@ -93,10 +100,11 @@ export const ShelterStep = ({
           currencySymbol={CURRENCY_SYMBOL}
           inputLabel={t('shelterStep.amountInputLabel')}
           presetGroupLabel={t('shelterStep.amountLegend')}
-          error={translateError(getDonationFieldError(errors, touched, 'amount'), {
-            min: MIN_AMOUNT,
-            max: MAX_AMOUNT,
-          })}
+          error={translateFieldError(
+            t,
+            getDonationFieldError(errors, touched, 'amount'),
+            { min: MIN_AMOUNT, max: MAX_AMOUNT },
+          )}
           selectedPreset={selectedPreset}
           formatPresetLabel={(preset) => `${preset} ${CURRENCY_SYMBOL}`}
           formatPresetAriaLabel={(preset) =>

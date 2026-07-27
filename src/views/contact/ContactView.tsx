@@ -58,7 +58,7 @@ export const ContactView = () => {
   const { t } = useTranslation();
 
   return (
-    <SplitLayout footer={<SiteFooter />}>
+    <SplitLayout footer={<SiteFooter t={t} />}>
       <ContactStack spacing={5}>
         <BackLink href={HOME_ROUTE} label={t('common.back')} />
 

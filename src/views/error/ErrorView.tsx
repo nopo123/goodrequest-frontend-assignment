@@ -25,7 +25,7 @@ export const ErrorView = ({ digest, onRetry }: ErrorViewProps) => {
   const { t } = useTranslation();
 
   return (
-    <SplitLayout footer={<SiteFooter />}>
+    <SplitLayout footer={<SiteFooter t={t} />}>
       <MessagePanel
         icon={<ErrorOutlineOutlinedIcon fontSize="inherit" />}
         title={t('errorPage.title')}

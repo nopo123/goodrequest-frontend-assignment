@@ -5,6 +5,8 @@ import { useState, type ReactNode } from 'react';
 
 import { ApiError } from '../lib';
 
+const STALE_TIME_MS = 60_000;
+
 const RETRYABLE_ATTEMPTS = 2;
 
 type QueryProviderProps = {
@@ -15,7 +17,7 @@ const createQueryClient = () =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60_000,
+        staleTime: STALE_TIME_MS,
         refetchOnWindowFocus: false,
         retry: (failureCount, error) => {
           const isClientError =

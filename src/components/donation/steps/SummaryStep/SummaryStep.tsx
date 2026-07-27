@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { FormikErrors, FormikTouched } from 'formik';
-import { useTranslation } from 'react-i18next';
 
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
 import {
@@ -15,15 +14,19 @@ import {
 import { CheckboxField } from '@/components/ui/CheckboxField/CheckboxField';
 import { DefinitionList } from '@/components/ui/DefinitionList/DefinitionList';
 import { SectionDivider } from '@/components/ui/SectionDivider/SectionDivider';
-import { useTranslateFieldError } from '@/hooks/form/useTranslateFieldError';
-import { useShelters } from '@/hooks/shelters/useShelters';
 import { DonationType, type DonationFormValues } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
+import type { SheltersState } from '@/types/shelters';
 import type { DefinitionRow } from '@/types/ui';
 import { formatCurrency } from '@/utils/format';
+import { translateFieldError } from '@/utils/translateFieldError';
 
 const CONSENT_FIELD_ID = 'consent';
 
 type SummaryStepProps = {
+  readonly t: TranslateFn;
+  readonly locale: string;
+  readonly shelters: SheltersState;
   readonly values: DonationFormValues;
   readonly errors: FormikErrors<DonationFormValues>;
   readonly touched: FormikTouched<DonationFormValues>;
@@ -33,6 +36,9 @@ type SummaryStepProps = {
 };
 
 export const SummaryStep = ({
+  t,
+  locale,
+  shelters,
   values,
   errors,
   touched,
@@ -40,15 +46,14 @@ export const SummaryStep = ({
   onConsentChange,
   onConsentBlur,
 }: SummaryStepProps) => {
-  const { t, i18n } = useTranslation();
-  const translateError = useTranslateFieldError();
-  const { data: shelters } = useShelters();
-
   const isSpecificShelter = values.donationType === DonationType.SPECIFIC_SHELTER;
-  const selectedShelter = (shelters ?? []).find(
+  const selectedShelter = shelters.items.find(
     (shelter) => shelter.id === values.shelterId,
   );
-  const consentError = translateError(getDonationFieldError(errors, touched, 'consent'));
+  const consentError = translateFieldError(
+    t,
+    getDonationFieldError(errors, touched, 'consent'),
+  );
 
   const donationRows: readonly DefinitionRow[] = [
     {
@@ -66,7 +71,7 @@ export const SummaryStep = ({
     {
       id: 'amount',
       label: t('summaryStep.amount'),
-      value: formatCurrency(parseAmount(values.amount), i18n.language),
+      value: formatCurrency(parseAmount(values.amount), locale),
     },
   ];
 

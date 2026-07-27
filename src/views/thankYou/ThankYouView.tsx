@@ -34,7 +34,7 @@ export const ThankYouView = () => {
   if (!isOpenedAfterSubmit) return null;
 
   return (
-    <SplitLayout footer={<SiteFooter />}>
+    <SplitLayout footer={<SiteFooter t={t} />}>
       <MessagePanel
         icon={<FavoriteIcon fontSize="inherit" />}
         title={t('success.title')}

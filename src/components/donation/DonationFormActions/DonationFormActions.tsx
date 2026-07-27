@@ -3,20 +3,24 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Button from '@mui/material/Button';
-import { useTranslation } from 'react-i18next';
+
+import { DonationStep } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
 
 import { ActionsRow, BackButton } from './DonationFormActions.styled';
 
 type DonationFormActionsProps = {
+  readonly t: TranslateFn;
   readonly isBackDisabled: boolean;
   readonly isSubmitStep: boolean;
   readonly isSubmitting: boolean;
   readonly onBack: () => void;
   readonly onNext: () => void;
-  readonly step: number;
+  readonly step: DonationStep;
 };
 
 export const DonationFormActions = ({
+  t,
   isBackDisabled,
   isSubmitStep,
   isSubmitting,
@@ -24,8 +28,7 @@ export const DonationFormActions = ({
   onNext,
   step,
 }: DonationFormActionsProps) => {
-  const { t } = useTranslation();
-  const hasBackButton = step !== 0;
+  const hasBackButton = step !== DonationStep.SHELTER;
 
   return (
     <ActionsRow

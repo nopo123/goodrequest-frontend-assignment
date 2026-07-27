@@ -14,7 +14,7 @@ export const NotFoundView = () => {
   const { t } = useTranslation();
 
   return (
-    <SplitLayout footer={<SiteFooter />}>
+    <SplitLayout footer={<SiteFooter t={t} />}>
       <MessagePanel
         icon={<SearchOffOutlinedIcon fontSize="inherit" />}
         title={t('notFound.title')}

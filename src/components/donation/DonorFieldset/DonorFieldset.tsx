@@ -4,7 +4,6 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import type { RefCallback } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { PhoneNumberField } from '@/components/ui/PhoneNumberField/PhoneNumberField';
 import { TextInputField } from '@/components/ui/TextInputField/TextInputField';
@@ -14,6 +13,7 @@ import {
   PHONE_COUNTRY_ORDER,
 } from '@/components/donation/DonationForm/constants';
 import { PhoneCountry, type DonorFormValues } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
 import type { PhoneCountryOption } from '@/types/ui';
 
 import { DonorFieldsetRoot, DonorHeaderRow } from './DonorFieldset.styled';
@@ -29,6 +29,7 @@ const PHONE_COUNTRIES: readonly PhoneCountryOption[] = PHONE_COUNTRY_ORDER.map(
 type DonorFieldErrors = Readonly<Partial<Record<keyof DonorFormValues, string>>>;
 
 type DonorFieldsetProps = {
+  readonly t: TranslateFn;
   readonly index: number;
   readonly donor: DonorFormValues;
   readonly errors: DonorFieldErrors;
@@ -44,6 +45,7 @@ type DonorFieldsetProps = {
 };
 
 export const DonorFieldset = ({
+  t,
   index,
   donor,
   errors,
@@ -54,8 +56,6 @@ export const DonorFieldset = ({
   onFieldBlur,
   onRemove,
 }: DonorFieldsetProps) => {
-  const { t } = useTranslation();
-
   const donorNumber = index + 1;
 
   return (

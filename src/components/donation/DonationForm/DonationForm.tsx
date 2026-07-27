@@ -3,7 +3,6 @@
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { DonationFormActions } from '@/components/donation/DonationFormActions/DonationFormActions';
 import { DonorStep } from '@/components/donation/steps/DonorStep/DonorStep';
@@ -29,6 +28,8 @@ import {
   type DonationFormValues,
   type DonorFormValues,
 } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
+import type { SheltersState } from '@/types/shelters';
 import type { StepperItem } from '@/types/ui';
 import { zodFormikValidate } from '@/utils/zodFormikValidate';
 
@@ -42,8 +43,13 @@ const STEP_LABEL_KEYS: Readonly<Record<DonationStep, string>> = {
 
 const validateDonation = zodFormikValidate<DonationFormValues>(donationSchema);
 
-export const DonationForm = () => {
-  const { t } = useTranslation();
+type DonationFormProps = {
+  readonly t: TranslateFn;
+  readonly locale: string;
+  readonly shelters: SheltersState;
+};
+
+export const DonationForm = ({ t, locale, shelters }: DonationFormProps) => {
   const router = useRouter();
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const {
@@ -55,7 +61,7 @@ export const DonationForm = () => {
     goToPreviousStep,
     goToStep,
   } = useDonationStep();
-  const { markSubmitted } = useDonationSubmission();
+  const { hasSubmitted, markSubmitted } = useDonationSubmission();
   const { mutateAsync } = useSubmitContribution({ markSubmitted });
 
   useDonationStepUrl(currentStep);
@@ -80,6 +86,7 @@ export const DonationForm = () => {
 
   const { isSubmitting, status } = formik;
   const submitError = typeof status === 'string' ? status : undefined;
+  const isSubmitLocked = isSubmitting || hasSubmitted;
 
   const resetSubmitAttempt = () => {
     setHasAttemptedSubmit(false);
@@ -99,7 +106,7 @@ export const DonationForm = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isSubmitting) return;
+    if (isSubmitLocked) return;
 
     setHasAttemptedSubmit(true);
     formik.setStatus(undefined);
@@ -159,11 +166,13 @@ export const DonationForm = () => {
         maxReachableIndex={visitedStep}
         ariaLabel={t('stepper.label')}
         errorLabel={t('stepper.hasError')}
-        onStepSelect={handleStepSelect}
+        onStepSelect={isSubmitLocked ? undefined : handleStepSelect}
       />
 
       {currentStep === DonationStep.SHELTER && (
         <ShelterStep
+          t={t}
+          shelters={shelters}
           values={formik.values}
           errors={formik.errors}
           touched={formik.touched}
@@ -180,6 +189,7 @@ export const DonationForm = () => {
 
       {currentStep === DonationStep.DONOR && (
         <DonorStep
+          t={t}
           values={formik.values}
           errors={formik.errors}
           touched={formik.touched}
@@ -204,6 +214,9 @@ export const DonationForm = () => {
 
       {currentStep === DonationStep.SUMMARY && (
         <SummaryStep
+          t={t}
+          locale={locale}
+          shelters={shelters}
           values={formik.values}
           errors={formik.errors}
           touched={formik.touched}
@@ -215,9 +228,10 @@ export const DonationForm = () => {
 
       <ActionsSlot>
         <DonationFormActions
+          t={t}
           isBackDisabled={isFirstStep}
           isSubmitStep={isLastStep}
-          isSubmitting={isSubmitting}
+          isSubmitting={isSubmitLocked}
           onBack={handleBack}
           onNext={handleNext}
           step={currentStep}

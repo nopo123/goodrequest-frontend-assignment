@@ -9,14 +9,24 @@ import { SplitLayout } from '@/components/layout/SplitLayout/SplitLayout';
 import { ContributionStats } from '@/components/stats/ContributionStats/ContributionStats';
 import { BackLink } from '@/components/ui/BackLink/BackLink';
 import { HOME_ROUTE } from '@/config/navigation';
+import { useContributionResults } from '@/hooks/stats/useContributionResults';
+import { formatCount, formatCurrency } from '@/utils/format';
 
 import { StatsBand } from './AboutProjectView.styled';
 
 export const AboutProjectView = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { data, isError } = useContributionResults();
+
+  const totalRaised =
+    data === undefined
+      ? undefined
+      : formatCurrency(data.contribution ?? 0, i18n.language);
+  const contributors =
+    data === undefined ? undefined : formatCount(data.contributors, i18n.language);
 
   return (
-    <SplitLayout footer={<SiteFooter />}>
+    <SplitLayout footer={<SiteFooter t={t} />}>
       <Stack spacing={5}>
         <BackLink href={HOME_ROUTE} label={t('common.back')} />
 
@@ -25,7 +35,13 @@ export const AboutProjectView = () => {
         <Typography variant="body1">{t('about.intro')}</Typography>
 
         <StatsBand>
-          <ContributionStats />
+          <ContributionStats
+            totalRaised={totalRaised}
+            totalRaisedLabel={t('about.totalRaised')}
+            contributors={contributors}
+            contributorsLabel={t('about.contributors')}
+            errorMessage={isError ? t('about.statsError') : undefined}
+          />
         </StatsBand>
 
         <Typography variant="body1">{t('about.outro')}</Typography>

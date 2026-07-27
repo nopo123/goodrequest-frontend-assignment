@@ -8,15 +8,24 @@ import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
 import { SplitLayout } from '@/components/layout/SplitLayout/SplitLayout';
 import { ImageFrame } from '@/components/ui/layout/layout.styled';
 import { DonationStepProvider } from '@/context/DonationStepContext';
+import { useShelters } from '@/hooks/shelters/useShelters';
+import type { SheltersState } from '@/types/shelters';
 
 const FORM_IMAGE_SRC = '/form-dog-page.jpg';
 
 export const DonationView = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { data, isPending, isError } = useShelters();
+
+  const shelters: SheltersState = {
+    items: data ?? [],
+    isPending,
+    isError,
+  };
 
   return (
     <SplitLayout
-      footer={<SiteFooter />}
+      footer={<SiteFooter t={t} />}
       aside={
         <ImageFrame>
           <Image
@@ -31,7 +40,7 @@ export const DonationView = () => {
       }
     >
       <DonationStepProvider>
-        <DonationForm />
+        <DonationForm t={t} locale={i18n.language} shelters={shelters} />
       </DonationStepProvider>
     </SplitLayout>
   );

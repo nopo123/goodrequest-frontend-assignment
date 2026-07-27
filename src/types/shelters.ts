@@ -24,3 +24,9 @@ export type ContributeDto = {
   readonly shelterID?: number | null;
   readonly value: number;
 };
+
+export type SheltersState = {
+  readonly items: readonly ShelterType[];
+  readonly isPending: boolean;
+  readonly isError: boolean;
+};

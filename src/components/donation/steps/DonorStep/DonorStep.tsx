@@ -7,7 +7,6 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { FormikErrors, FormikTouched } from 'formik';
 import { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import {
   DONOR_LIST_MAX_HEIGHT,
@@ -16,11 +15,13 @@ import {
 import { getDonorFieldError } from '@/components/donation/DonationForm/errors';
 import { DonorFieldset } from '@/components/donation/DonorFieldset/DonorFieldset';
 import { ScrollArea } from '@/components/ui/ScrollArea/ScrollArea';
-import { useTranslateFieldError } from '@/hooks/form/useTranslateFieldError';
 import { useScrollIntoViewOnGrow } from '@/hooks/ui/useScrollIntoViewOnGrow';
 import type { DonationFormValues, DonorFormValues } from '@/types/donation';
+import type { TranslateFn } from '@/types/i18n';
+import { translateFieldError } from '@/utils/translateFieldError';
 
 type DonorStepProps = {
+  readonly t: TranslateFn;
   readonly values: DonationFormValues;
   readonly errors: FormikErrors<DonationFormValues>;
   readonly touched: FormikTouched<DonationFormValues>;
@@ -35,6 +36,7 @@ type DonorStepProps = {
 };
 
 export const DonorStep = ({
+  t,
   values,
   errors,
   touched,
@@ -43,9 +45,6 @@ export const DonorStep = ({
   onAddDonor,
   onRemoveDonor,
 }: DonorStepProps) => {
-  const { t } = useTranslation();
-  const translateError = useTranslateFieldError();
-
   const donorCount = values.donors.length;
   const hasMultipleDonors = donorCount > 1;
   const canAddDonor = donorCount < MAX_DONORS;
@@ -70,22 +69,27 @@ export const DonorStep = ({
               <Fragment key={index}>
                 {index > 0 && <Divider />}
                 <DonorFieldset
+                  t={t}
                   ref={index === lastDonorIndex ? setLastDonorNode : undefined}
                   index={index}
                   donor={donor}
                   showTitle={hasMultipleDonors}
                   isRemovable={hasMultipleDonors}
                   errors={{
-                    firstName: translateError(
+                    firstName: translateFieldError(
+                      t,
                       getDonorFieldError(errors, touched, index, 'firstName'),
                     ),
-                    lastName: translateError(
+                    lastName: translateFieldError(
+                      t,
                       getDonorFieldError(errors, touched, index, 'lastName'),
                     ),
-                    email: translateError(
+                    email: translateFieldError(
+                      t,
                       getDonorFieldError(errors, touched, index, 'email'),
                     ),
-                    phone: translateError(
+                    phone: translateFieldError(
+                      t,
                       getDonorFieldError(errors, touched, index, 'phone'),
                     ),
                   }}
