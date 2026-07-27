@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Good boy — Frontend Assignment
 
-## Getting Started
+Darovací formulár pre nadáciu Good boy (GoodRequest frontend zadanie). Pôvodné zadanie je v [ASSIGNMENT.md](./ASSIGNMENT.md).
 
-First, run the development server:
+## Ako spustiť
+
+### Predpoklady
+
+- Node.js 20+ (testované na 24.18.0)
+- npm
+
+### 1. Nainštaluj závislosti
+
+```bash
+npm install
+```
+
+### 2. Nastav premenné prostredia
+
+```bash
+cp .env.example .env.local
+```
+
+`.env.local` obsahuje:
+
+```
+NEXT_PUBLIC_API_BASE_URL=https://frontend-assignment-api.goodrequest.dev
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+`NEXT_PUBLIC_API_BASE_URL` je adresa hosťovaného API zo zadania (zoznam útulkov, štatistiky, odoslanie príspevku). Bez tohto súboru appka pri štarte zhodí chybu.
+
+### 3. Spusti dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikácia beží na [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Ďalšie príkazy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build        # produkčný build
+npm run start         # spustenie produkčného buildu (po npm run build)
+npm run lint           # ESLint
+npx tsc --noEmit       # type-check bez emitovania
+```
 
-## Learn More
+## Tech stack
 
-To learn more about Next.js, take a look at the following resources:
+| Vrstva | Knižnica |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Jazyk | TypeScript |
+| Server state | TanStack Query |
+| Klient state | React Context + useReducer |
+| Formulár | Formik + Zod |
+| HTTP klient | axios |
+| UI komponenty | MUI |
+| Vlastné komponenty | styled-components |
+| Lokalizácia | i18next / react-i18next (SK, EN) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Štruktúra projektu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  api/            volania API — jeden súbor na doménu (napr. shelters.ts)
+  app/            Next.js App Router — stránky a layout
+  hooks/          TanStack Query hooky, zoskupené po doménach
+  lib/
+    lib.ts        axios instance (baseURL z env, error handling)
+    i18n/         i18next konfigurácia a preklady (sk, en)
+    query/        QueryClient provider a query keys
+    theme/        MUI theme + styled-components theme, zdieľané design tokeny
+    providers/    kompozícia všetkých providerov
+  types/          zdieľané TypeScript typy a enumy
+```
 
-## Deploy on Vercel
+## API
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Appka konzumuje 3 endpointy hosťovaného API (dokumentácia: https://frontend-assignment-api.goodrequest.dev/apidoc/):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /api/v1/shelters/` — zoznam zapojených útulkov
+- `GET /api/v1/shelters/results` — celková vyzbieraná suma a počet darcov
+- `POST /api/v1/shelters/contribute` — odoslanie príspevku
