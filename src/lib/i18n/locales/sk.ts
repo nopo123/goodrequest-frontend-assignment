@@ -143,6 +143,9 @@ export const sk = {
     statsError: 'Údaje o zbierke sa nepodarilo načítať',
   },
   meta: {
+    siteName: 'Nadácia Good boy',
+    thankYouTitle: 'Ďakujeme',
+    thankYouDescription: 'Potvrdenie o odoslaní príspevku nadácii Good Boy',
     shelterStepTitle: 'Vyberte si, ako chcete pomôcť',
     donorStepTitle: 'Vaše osobné údaje',
     summaryStepTitle: 'Skontrolujte si zadané údaje',

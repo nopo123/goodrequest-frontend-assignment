@@ -145,6 +145,9 @@ export const en: TranslationResource = {
     statsError: 'The fundraising data could not be loaded',
   },
   meta: {
+    siteName: 'Good boy Foundation',
+    thankYouTitle: 'Thank you',
+    thankYouDescription: 'Confirmation of your donation to the Good Boy foundation',
     shelterStepTitle: 'Choose how you want to help',
     donorStepTitle: 'Your personal details',
     summaryStepTitle: 'Check the details you entered',

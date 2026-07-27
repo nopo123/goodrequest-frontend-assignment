@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 
 import { DONATION_STEP_SLUG_ORDER } from '@/components/donation/DonationForm/constants';
-import { SEO_STRINGS, buildPageMetadata } from '@/lib/seo/seo';
+import { resolveRequestLanguage } from '@/lib/i18n/server';
+import { buildPageMetadata, getSeoStrings } from '@/lib/seo/seo';
 import { AppRoute, DONATION_STEP_QUERY_PARAM } from '@/routes/routes';
 import { DonationStepSlug } from '@/types/donation';
+import type { Language } from '@/types/i18n';
 import { DonationView } from '@/views/donation/DonationView';
 
 type SearchParamValue = string | readonly string[] | undefined;
@@ -17,19 +19,25 @@ type StepSeo = {
   readonly description: string;
 };
 
-const STEP_SEO: Readonly<Record<DonationStepSlug, StepSeo>> = {
-  [DonationStepSlug.SHELTER]: {
-    title: SEO_STRINGS.shelterStepTitle,
-    description: SEO_STRINGS.donateDescription,
-  },
-  [DonationStepSlug.DONOR]: {
-    title: SEO_STRINGS.donorStepTitle,
-    description: SEO_STRINGS.donorStepDescription,
-  },
-  [DonationStepSlug.SUMMARY]: {
-    title: SEO_STRINGS.summaryStepTitle,
-    description: SEO_STRINGS.summaryStepDescription,
-  },
+const buildStepSeo = (
+  language: Language,
+): Readonly<Record<DonationStepSlug, StepSeo>> => {
+  const strings = getSeoStrings(language);
+
+  return {
+    [DonationStepSlug.SHELTER]: {
+      title: strings.shelterStepTitle,
+      description: strings.donateDescription,
+    },
+    [DonationStepSlug.DONOR]: {
+      title: strings.donorStepTitle,
+      description: strings.donorStepDescription,
+    },
+    [DonationStepSlug.SUMMARY]: {
+      title: strings.summaryStepTitle,
+      description: strings.summaryStepDescription,
+    },
+  };
 };
 
 const isDonationStepSlug = (value: string): value is DonationStepSlug =>
@@ -45,11 +53,16 @@ const resolveStepSlug = (value: SearchParamValue): DonationStepSlug => {
 export const generateMetadata = async ({
   searchParams,
 }: DonationRouteProps): Promise<Metadata> => {
-  const resolvedSearchParams = await searchParams;
+  const [language, resolvedSearchParams] = await Promise.all([
+    resolveRequestLanguage(),
+    searchParams,
+  ]);
+
   const slug = resolveStepSlug(resolvedSearchParams[DONATION_STEP_QUERY_PARAM]);
-  const { title, description } = STEP_SEO[slug];
+  const { title, description } = buildStepSeo(language)[slug];
 
   return buildPageMetadata({
+    language,
     title,
     description,
     canonicalPath: AppRoute.DONATION,

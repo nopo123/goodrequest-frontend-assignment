@@ -83,6 +83,11 @@ export const DonationForm = () => {
     },
   });
 
+  const resetSubmitAttempt = () => {
+    setHasAttemptedSubmit(false);
+    void formik.setFieldTouched('consent', false);
+  };
+
   const isStepRevealed = (step: DonationStep): boolean =>
     step < visitedStep || hasAttemptedSubmit;
 
@@ -118,7 +123,18 @@ export const DonationForm = () => {
       return;
     }
 
+    resetSubmitAttempt();
     goToNextStep();
+  };
+
+  const handleBack = () => {
+    resetSubmitAttempt();
+    goToPreviousStep();
+  };
+
+  const handleStepSelect = (index: number) => {
+    resetSubmitAttempt();
+    goToStep(index as DonationStep);
   };
 
   const handleDonorFieldChange = <TField extends keyof DonorFormValues>(
@@ -140,7 +156,7 @@ export const DonationForm = () => {
         maxReachableIndex={visitedStep}
         ariaLabel={t('stepper.label')}
         errorLabel={t('stepper.hasError')}
-        onStepSelect={(index) => goToStep(index as DonationStep)}
+        onStepSelect={handleStepSelect}
       />
 
       {currentStep === DonationStep.SHELTER && (
@@ -198,7 +214,7 @@ export const DonationForm = () => {
           isBackDisabled={isFirstStep}
           isSubmitStep={isLastStep}
           isSubmitting={formik.isSubmitting}
-          onBack={goToPreviousStep}
+          onBack={handleBack}
           onNext={handleNext}
         />
       </ActionsSlot>

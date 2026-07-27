@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
 
-import { SEO_STRINGS, buildPageMetadata } from '@/lib/seo/seo';
+import { resolveRequestLanguage } from '@/lib/i18n/server';
+import { buildPageMetadata, getSeoStrings } from '@/lib/seo/seo';
 import { AppRoute } from '@/routes/routes';
 import { AboutProjectView } from '@/views/aboutProject/AboutProjectView';
 
-export const metadata: Metadata = buildPageMetadata({
-  title: SEO_STRINGS.aboutTitle,
-  description: SEO_STRINGS.aboutDescription,
-  canonicalPath: AppRoute.ABOUT_PROJECT,
-});
+export const generateMetadata = async (): Promise<Metadata> => {
+  const language = await resolveRequestLanguage();
+  const strings = getSeoStrings(language);
+
+  return buildPageMetadata({
+    language,
+    title: strings.aboutTitle,
+    description: strings.aboutDescription,
+    canonicalPath: AppRoute.ABOUT_PROJECT,
+  });
+};
 
 const AboutProjectRoute = () => <AboutProjectView />;
 
