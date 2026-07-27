@@ -21,5 +21,5 @@ export const ContactGrid = styled(Box)(({ theme }) => ({
 export const ContactImageFrame = styled(ImageFrame)({
   width: '100%',
   height: 'auto',
-  aspectRatio: '2559 / 1706',
+  aspectRatio: '10 / 3',
 });

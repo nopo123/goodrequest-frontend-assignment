@@ -11,9 +11,7 @@ type ResponsiveFontSizes = {
 
 export const pxToRem = (value: number): string => `${value / 16}rem`;
 
-export const remToPx = (value: string): number => Math.round(parseFloat(value) * 16);
-
-export const responsiveFontSizes = ({ sm, md, lg }: ResponsiveFontSizes) => ({
+const responsiveFontSizes = ({ sm, md, lg }: ResponsiveFontSizes) => ({
   ...(sm === undefined
     ? null
     : { [`@media (min-width:${BREAKPOINTS.tablet}px)`]: { fontSize: pxToRem(sm) } }),

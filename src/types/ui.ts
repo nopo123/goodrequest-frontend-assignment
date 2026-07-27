@@ -1,6 +1,7 @@
 export type StepperItem = {
   readonly id: string | number;
   readonly label: string;
+  readonly hasError?: boolean;
 };
 
 export type ToggleOption<TValue extends string | number> = {

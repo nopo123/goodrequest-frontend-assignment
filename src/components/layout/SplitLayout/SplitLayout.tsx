@@ -15,6 +15,8 @@ const DEFAULT_CONTENT_VERTICAL_PADDING = 60;
 
 const PAGE_EDGE_PADDING = 20;
 
+const PAGE_HORIZONTAL_PADDING = 80;
+
 const FULL_HEIGHT = `calc(100vh - ${PAGE_EDGE_PADDING * 2}px)`;
 
 type SplitLayoutProps = {
@@ -49,8 +51,14 @@ export const SplitLayout = ({
       maxWidth={false}
       disableGutters
       sx={{
-        maxWidth: CONTENT_MAX_WIDTH,
-        px: `${PAGE_EDGE_PADDING}px`,
+        maxWidth: {
+          xs: CONTENT_MAX_WIDTH + PAGE_EDGE_PADDING * 2,
+          md: CONTENT_MAX_WIDTH + PAGE_HORIZONTAL_PADDING * 2,
+        },
+        px: {
+          xs: `${PAGE_EDGE_PADDING}px`,
+          md: `${PAGE_HORIZONTAL_PADDING}px`,
+        },
         py: `${PAGE_EDGE_PADDING}px`,
       }}
     >

@@ -3,8 +3,6 @@ export const sk = {
     appName: 'Good boy',
     back: 'Späť',
     continue: 'Pokračovať',
-    loading: 'Načítavam',
-    retry: 'Skúsiť znova',
     optional: 'Nepovinné',
     skipToContent: 'Preskočiť na obsah',
   },
@@ -12,15 +10,13 @@ export const sk = {
     label: 'Hlavná navigácia',
     contact: 'Kontakt',
     about: 'O projekte',
-    donate: 'Prispieť',
   },
   stepper: {
     label: 'Priebeh formulára',
-    progress: 'Krok {{current}} z {{total}}',
     shelter: 'Výber útulku',
     donor: 'Osobné údaje',
     confirmation: 'Potvrdenie',
-    completed: 'dokončené',
+    hasError: 'obsahuje chybu',
   },
   shelterStep: {
     title: 'Vyberte si možnosť, ako chcete pomôcť',
@@ -66,16 +62,15 @@ export const sk = {
     phone: 'Telefónne číslo',
     consent: 'Súhlasím so spracovaním mojich osobných údajov',
     submit: 'Odoslať formulár',
-    submitting: 'Odosielam',
     notFilled: 'Nevyplnené',
   },
   success: {
     title: 'Ďakujeme za Váš príspevok',
     description: 'Vaša podpora pomôže psom, ktorí to najviac potrebujú',
+    redirect: 'Presmerujeme Vás na formulár za {{seconds}} s',
     newDonation: 'Prispieť znova',
   },
   errors: {
-    submitTitle: 'Príspevok sa nepodarilo odoslať',
     submitGeneric: 'Skúste to prosím o chvíľu znova',
   },
   validation: {

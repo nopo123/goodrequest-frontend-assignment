@@ -9,9 +9,9 @@ export enum Language {
   EN = 'en',
 }
 
-export const DEFAULT_LANGUAGE = Language.SK;
+const DEFAULT_LANGUAGE = Language.SK;
 
-export const SUPPORTED_LANGUAGES = [Language.SK, Language.EN] as const;
+const SUPPORTED_LANGUAGES = [Language.SK, Language.EN] as const;
 
 const DEFAULT_NAMESPACE = 'translation';
 
@@ -20,7 +20,7 @@ const RESOURCES = {
   [Language.EN]: { [DEFAULT_NAMESPACE]: en },
 } as const;
 
-export const isSupportedLanguage = (value: string): value is Language =>
+const isSupportedLanguage = (value: string): value is Language =>
   SUPPORTED_LANGUAGES.some((language) => language === value);
 
 export const resolveBrowserLanguage = (): Language => {

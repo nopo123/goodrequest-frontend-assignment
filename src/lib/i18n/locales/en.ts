@@ -5,8 +5,6 @@ export const en: TranslationResource = {
     appName: "Good boy",
     back: "Back",
     continue: "Continue",
-    loading: "Loading",
-    retry: "Try again",
     optional: "Optional",
     skipToContent: "Skip to content",
   },
@@ -14,15 +12,13 @@ export const en: TranslationResource = {
     label: "Main navigation",
     contact: "Contact",
     about: "About",
-    donate: "Donate",
   },
   stepper: {
     label: "Form progress",
-    progress: "Step {{current}} of {{total}}",
     shelter: "Choose a shelter",
     donor: "Your details",
     confirmation: "Confirmation",
-    completed: "completed",
+    hasError: "contains an error",
   },
   shelterStep: {
     title: "Choose how you would like to help",
@@ -68,16 +64,15 @@ export const en: TranslationResource = {
     phone: "Phone number",
     consent: "I agree with the processing of my personal data",
     submit: "Submit the form",
-    submitting: "Submitting",
     notFilled: "Not filled in",
   },
   success: {
     title: "Thank you for your donation",
     description: "Your support will help the dogs who need it the most",
+    redirect: "Redirecting you to the form in {{seconds}} s",
     newDonation: "Donate again",
   },
   errors: {
-    submitTitle: "The donation could not be submitted",
     submitGeneric: "Please try again in a moment",
   },
   validation: {

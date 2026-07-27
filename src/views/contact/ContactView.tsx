@@ -90,7 +90,7 @@ export const ContactView = () => {
             alt={t('contact.imageAlt')}
             fill
             sizes="100vw"
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 32%' }}
           />
         </ContactImageFrame>
       </ContactStack>

@@ -18,7 +18,6 @@ export enum DonationStepActionType {
   NEXT = 'NEXT',
   PREVIOUS = 'PREVIOUS',
   GO_TO = 'GO_TO',
-  RESET = 'RESET',
 }
 
 export type DonorFormValues = {
@@ -45,5 +44,4 @@ export type DonationStepState = {
 export type DonationStepAction =
   | { readonly type: DonationStepActionType.NEXT }
   | { readonly type: DonationStepActionType.PREVIOUS }
-  | { readonly type: DonationStepActionType.GO_TO; readonly step: DonationStep }
-  | { readonly type: DonationStepActionType.RESET };
+  | { readonly type: DonationStepActionType.GO_TO; readonly step: DonationStep };

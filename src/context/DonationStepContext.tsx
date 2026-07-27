@@ -31,11 +31,9 @@ type DonationStepContextValue = {
   readonly visitedStep: DonationStep;
   readonly isFirstStep: boolean;
   readonly isLastStep: boolean;
-  readonly totalSteps: number;
   readonly goToNextStep: () => void;
   readonly goToPreviousStep: () => void;
   readonly goToStep: (step: DonationStep) => void;
-  readonly resetSteps: () => void;
 };
 
 const DonationStepContext = createContext<DonationStepContextValue | null>(null);
@@ -65,8 +63,6 @@ const donationStepReducer = (
       if (requestedStep > state.visitedStep) return state;
       return { ...state, currentStep: requestedStep };
     }
-    case DonationStepActionType.RESET:
-      return INITIAL_STATE;
     default:
       return state;
   }
@@ -94,24 +90,17 @@ export const DonationStepProvider = ({ children }: DonationStepProviderProps) =>
     [],
   );
 
-  const resetSteps = useCallback(
-    () => dispatch({ type: DonationStepActionType.RESET }),
-    [],
-  );
-
   const value = useMemo<DonationStepContextValue>(
     () => ({
       currentStep: state.currentStep,
       visitedStep: state.visitedStep,
       isFirstStep: state.currentStep === FIRST_STEP,
       isLastStep: state.currentStep === LAST_STEP,
-      totalSteps: DONATION_STEP_ORDER.length,
       goToNextStep,
       goToPreviousStep,
       goToStep,
-      resetSteps,
     }),
-    [state, goToNextStep, goToPreviousStep, goToStep, resetSteps],
+    [state, goToNextStep, goToPreviousStep, goToStep],
   );
 
   return (

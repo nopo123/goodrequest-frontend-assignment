@@ -132,5 +132,3 @@ export const DonorFieldset = ({
     </DonorFieldsetRoot>
   );
 };
-
-export type { DonorFieldErrors };
