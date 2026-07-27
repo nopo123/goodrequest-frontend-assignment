@@ -8,53 +8,45 @@ import { pxToRem } from '@/lib/theme/typography';
 
 const UNIT_GAP = 10;
 
-const DISPLAY_FONT_SIZE_BASE = 40;
+const MIN_FIELD_WIDTH = 50;
 
-const DISPLAY_FONT_SIZE_SM = 48;
-
-const DISPLAY_FONT_SIZE_MD = 60;
+const HORIZONTAL_PADDING = 20;
 
 type NumberFieldRowProps = {
   readonly hasError: boolean;
-  readonly fieldWidth: number;
 };
-
-const scaledFieldWidth = (fieldWidth: number, fontSize: number): number =>
-  Math.round((fieldWidth * fontSize) / DISPLAY_FONT_SIZE_BASE);
 
 export const NumberFieldRoot = styled(Stack)({
   alignItems: 'center',
 }) as typeof Stack;
 
 export const NumberFieldRow = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'hasError' && prop !== 'fieldWidth',
-})<NumberFieldRowProps>(({ theme, hasError, fieldWidth }) => ({
+  shouldForwardProp: (prop) => prop !== 'hasError',
+})<NumberFieldRowProps>(({ theme, hasError }) => ({
   display: 'flex',
   alignItems: 'baseline',
   justifyContent: 'center',
   gap: UNIT_GAP,
-  width: `min(${fieldWidth}px, 100%)`,
+  minWidth: MIN_FIELD_WIDTH,
+  maxWidth: '100%',
+  paddingLeft: HORIZONTAL_PADDING,
+  paddingRight: HORIZONTAL_PADDING,
   paddingBottom: theme.spacing(2),
   borderBottom: `2px solid ${
     hasError ? theme.palette.error.main : theme.palette.primary.main
   }`,
   transition: theme.transitions.create('border-color'),
-  [theme.breakpoints.up('sm')]: {
-    width: `min(${scaledFieldWidth(fieldWidth, DISPLAY_FONT_SIZE_SM)}px, 100%)`,
-  },
-  [theme.breakpoints.up('md')]: {
-    width: `min(${scaledFieldWidth(fieldWidth, DISPLAY_FONT_SIZE_MD)}px, 100%)`,
-  },
 }));
 
 export const NumberFieldInput = styled(InputBase)(({ theme }) => ({
-  flex: 1,
-  minWidth: 0,
+  width: 'auto',
   '& input': {
     ...theme.typography.display,
     textAlign: 'center',
     padding: 0,
     height: 'auto',
+    width: 'auto',
+    fieldSizing: 'content',
   },
 }));
 
@@ -63,8 +55,4 @@ export const NumberFieldUnit = styled('span')({
   fontSize: pxToRem(24),
   lineHeight: 1,
   color: COLORS.textSecondary,
-});
-
-export const NumberFieldUnitSpacer = styled(NumberFieldUnit)({
-  visibility: 'hidden',
 });

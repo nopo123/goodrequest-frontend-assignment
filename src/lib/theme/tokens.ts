@@ -4,7 +4,7 @@ export const COLORS = {
   primaryLight: '#EEF2FF',
   textPrimary: '#111827',
   textSecondary: '#374151',
-  textTertiary: '#667085',
+  textTertiary: '#4B5563',
   textMuted: '#9CA3AF',
   textDisabled: '#98A2B3',
   border: '#D0D5DD',

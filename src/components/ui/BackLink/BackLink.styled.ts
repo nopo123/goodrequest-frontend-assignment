@@ -8,9 +8,9 @@ export const BackLinkRoot = styled(MuiLink)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(1),
   alignSelf: 'flex-start',
-  color: COLORS.textPrimary,
+  color: COLORS.primary,
   fontWeight: 500,
   '&:hover': {
-    color: COLORS.primary,
+    color: COLORS.primaryDark,
   },
 })) as typeof MuiLink;

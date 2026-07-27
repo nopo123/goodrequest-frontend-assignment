@@ -98,7 +98,7 @@ export const SummaryStep = ({
       <Typography variant="h1">{t('summaryStep.title')}</Typography>
 
       <Stack spacing={2}>
-        <Typography variant="h6" component="h2">
+        <Typography variant="h5" component="h2">
           {t('summaryStep.sectionTitle')}
         </Typography>
 

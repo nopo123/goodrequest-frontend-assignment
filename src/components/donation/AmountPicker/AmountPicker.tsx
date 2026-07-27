@@ -1,6 +1,7 @@
 'use client';
 
 import Stack from '@mui/material/Stack';
+import type { ReactNode } from 'react';
 
 import { NumberField } from '@/components/ui/NumberField/NumberField';
 import { ToggleGroupButtons } from '@/components/ui/ToggleGroupButtons/ToggleGroupButtons';
@@ -8,14 +9,13 @@ import type { ToggleOption } from '@/types/ui';
 
 const MOBILE_PRESET_COLUMNS = 3;
 
-const AMOUNT_FIELD_WIDTH = 180;
-
 type AmountPickerProps = {
   readonly id: string;
   readonly name: string;
   readonly value: string;
   readonly presets: readonly number[];
   readonly currencySymbol: string;
+  readonly currencyIcon: ReactNode;
   readonly inputLabel: string;
   readonly presetGroupLabel: string;
   readonly selectedPreset: number | null;
@@ -32,6 +32,7 @@ export const AmountPicker = ({
   value,
   presets,
   currencySymbol,
+  currencyIcon,
   inputLabel,
   presetGroupLabel,
   selectedPreset,
@@ -53,9 +54,8 @@ export const AmountPicker = ({
         id={id}
         name={name}
         value={value}
-        unit={currencySymbol}
+        unit={currencyIcon}
         ariaLabel={inputLabel}
-        fieldWidth={AMOUNT_FIELD_WIDTH}
         error={error}
         onChange={onChange}
         onBlur={onBlur}

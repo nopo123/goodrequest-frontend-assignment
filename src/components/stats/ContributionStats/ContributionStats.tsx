@@ -2,9 +2,8 @@
 
 import Alert from '@mui/material/Alert';
 import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
 
-import { StatItem, StatValue, StatsGrid } from './ContributionStats.styled';
+import { StatItem, StatLabel, StatValue, StatsGrid } from './ContributionStats.styled';
 
 const SKELETON_WIDTH = 160;
 
@@ -37,9 +36,7 @@ export const ContributionStats = ({
         ) : (
           <StatValue variant="display">{totalRaised}</StatValue>
         )}
-        <Typography variant="body1" color="text.secondary">
-          {totalRaisedLabel}
-        </Typography>
+        <StatLabel variant="body1">{totalRaisedLabel}</StatLabel>
       </StatItem>
 
       <StatItem spacing={1}>
@@ -48,9 +45,7 @@ export const ContributionStats = ({
         ) : (
           <StatValue variant="display">{contributors}</StatValue>
         )}
-        <Typography variant="body1" color="text.secondary">
-          {contributorsLabel}
-        </Typography>
+        <StatLabel variant="body1">{contributorsLabel}</StatLabel>
       </StatItem>
     </StatsGrid>
   );

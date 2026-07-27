@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 import { COLORS } from '@/lib/theme/tokens';
+import { pxToRem } from '@/lib/theme/typography';
 
 export const StatsGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
@@ -22,4 +23,12 @@ export const StatItem = styled(Stack)({
 export const StatValue = styled(Typography)({
   color: COLORS.primary,
   fontWeight: 500,
+}) as typeof Typography;
+
+export const StatLabel = styled(Typography)({
+  fontSize: pxToRem(18),
+  lineHeight: 24 / 18,
+  fontWeight: 500,
+  letterSpacing: 0,
+  color: COLORS.textPrimary,
 }) as typeof Typography;

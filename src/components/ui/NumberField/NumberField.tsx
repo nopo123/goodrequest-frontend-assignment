@@ -1,26 +1,30 @@
 'use client';
 
 import FormHelperText from '@mui/material/FormHelperText';
+import type { ReactNode } from 'react';
 
 import {
   NumberFieldInput,
   NumberFieldRoot,
   NumberFieldRow,
   NumberFieldUnit,
-  NumberFieldUnitSpacer,
 } from './NumberField.styled';
 
-const DEFAULT_FIELD_WIDTH = 220;
+const MIN_INPUT_CHARACTERS = 2;
+
+const INPUT_CHARACTER_PADDING = 1;
+
+const computeInputSize = (value: string): number =>
+  Math.max(MIN_INPUT_CHARACTERS, value.length + INPUT_CHARACTER_PADDING);
 
 type NumberFieldProps = {
   readonly id: string;
   readonly name: string;
   readonly value: string;
   readonly ariaLabel: string;
-  readonly unit?: string;
+  readonly unit?: ReactNode;
   readonly placeholder?: string;
   readonly error?: string;
-  readonly fieldWidth?: number;
   readonly onChange: (value: string) => void;
   readonly onBlur: () => void;
 };
@@ -33,7 +37,6 @@ export const NumberField = ({
   unit,
   placeholder = '0',
   error,
-  fieldWidth = DEFAULT_FIELD_WIDTH,
   onChange,
   onBlur,
 }: NumberFieldProps) => {
@@ -43,11 +46,7 @@ export const NumberField = ({
 
   return (
     <NumberFieldRoot spacing={1}>
-      <NumberFieldRow hasError={hasError} fieldWidth={fieldWidth}>
-        {hasUnit && (
-          <NumberFieldUnitSpacer aria-hidden="true">{unit}</NumberFieldUnitSpacer>
-        )}
-
+      <NumberFieldRow hasError={hasError}>
         <NumberFieldInput
           id={id}
           name={name}
@@ -62,6 +61,7 @@ export const NumberField = ({
               'aria-label': ariaLabel,
               'aria-invalid': hasError,
               'aria-describedby': hasError ? errorId : undefined,
+              size: computeInputSize(value),
             },
           }}
         />

@@ -4,7 +4,6 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MuiLink from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Link from 'next/link';
 
@@ -14,7 +13,7 @@ import { SOCIAL_LINKS } from '@/config/social';
 import type { TranslateFn } from '@/types/i18n';
 import { SocialNetwork } from '@/types/social';
 
-import { FooterNav, FooterRow } from './SiteFooter.styled';
+import { FooterNav, FooterNavLink, FooterRow } from './SiteFooter.styled';
 
 const SOCIAL_ICONS = {
   [SocialNetwork.FACEBOOK]: FacebookIcon,
@@ -53,16 +52,14 @@ export const SiteFooter = ({ t }: SiteFooterProps) => (
         </Stack>
 
         {FOOTER_NAV_LINKS.map((link) => (
-          <MuiLink
+          <FooterNavLink
             key={link.href}
             component={Link}
             href={link.href}
             underline="hover"
-            color="text.secondary"
-            variant="body2"
           >
             {t(link.labelKey)}
-          </MuiLink>
+          </FooterNavLink>
         ))}
       </FooterNav>
     </FooterRow>

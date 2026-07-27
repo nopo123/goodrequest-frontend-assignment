@@ -1,5 +1,6 @@
 'use client';
 
+import EuroOutlinedIcon from '@mui/icons-material/EuroOutlined';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { FormikErrors, FormikTouched } from 'formik';
@@ -99,6 +100,7 @@ export const ShelterStep = ({
           value={values.amount}
           presets={AMOUNT_PRESETS}
           currencySymbol={CURRENCY_SYMBOL}
+          currencyIcon={<EuroOutlinedIcon fontSize="inherit" />}
           inputLabel={t('shelterStep.amountInputLabel')}
           presetGroupLabel={t('shelterStep.amountLegend')}
           error={translateFieldError(
