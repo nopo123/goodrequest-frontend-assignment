@@ -51,6 +51,7 @@ export const DonationForm = () => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
+  const [isSubmitPending, setIsSubmitPending] = useState(false);
   const {
     currentStep,
     visitedStep,
@@ -61,7 +62,7 @@ export const DonationForm = () => {
     goToStep,
   } = useDonationStep();
   const { markSubmitted } = useDonationSubmission();
-  const { mutateAsync } = useSubmitContribution();
+  const { mutateAsync } = useSubmitContribution({ markSubmitted });
 
   useDonationStepUrl(currentStep);
 
@@ -71,7 +72,6 @@ export const DonationForm = () => {
     onSubmit: async (values) => {
       try {
         await mutateAsync(buildContributePayload(values));
-        markSubmitted();
         router.push(AppRoute.THANK_YOU);
       } catch (submitFailure) {
         const message =
@@ -79,6 +79,7 @@ export const DonationForm = () => {
             ? submitFailure.message
             : t('errors.submitGeneric');
         setErrorMessage(message);
+        setIsSubmitPending(false);
       }
     },
   });
@@ -99,6 +100,10 @@ export const DonationForm = () => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isSubmitPending) return;
+
+    setIsSubmitPending(true);
     setHasAttemptedSubmit(true);
 
     const validationErrors = await formik.validateForm();
@@ -109,6 +114,7 @@ export const DonationForm = () => {
     if (firstInvalidStep !== undefined) {
       await formik.setTouched(buildStepTouched(firstInvalidStep, formik.values));
       goToStep(firstInvalidStep);
+      setIsSubmitPending(false);
       return;
     }
 
@@ -213,7 +219,7 @@ export const DonationForm = () => {
         <DonationFormActions
           isBackDisabled={isFirstStep}
           isSubmitStep={isLastStep}
-          isSubmitting={formik.isSubmitting}
+          isSubmitting={isSubmitPending}
           onBack={handleBack}
           onNext={handleNext}
         />
