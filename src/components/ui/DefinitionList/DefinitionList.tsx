@@ -29,7 +29,7 @@ export const DefinitionList = ({ groups }: DefinitionListProps) => (
               direction={{ xs: 'column', sm: 'row' }}
               spacing={{ xs: 0.25, sm: 2 }}
             >
-              <Typography component="dt" variant="body1" color="text.secondary">
+              <Typography component="dt" variant="body1" color="textSecondary">
                 {row.label}
               </Typography>
               <DefinitionValue component="dd" variant="body1">
