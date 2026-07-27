@@ -134,8 +134,6 @@ Appka konzumuje 3 endpointy hosťovaného API (dokumentácia: https://frontend-a
 - **`robots.ts`** a **`sitemap.ts`** — generované z `AppRoute` enumu, `/thank-you` je vylúčené z indexovania.
 - **Metadata sú lokalizované** — titulok, description, `og:locale` aj názov nadácie sa vyberajú podľa jazyka vyjednaného zo `Accept-Language` (viď sekcia Jazyk).
 
-Pozor na zlučovanie metadát: Next zlučuje `Metadata` objekty **plocho**, takže page-level `openGraph` prepíše celý objekt z layoutu — vrátane obrázka. Preto sú zdieľané polia (`type`, `locale`, `siteName`, `images`) vytiahnuté do jedného miesta v `lib/seo/seo.ts` a každá stránka ich spreaduje cez `buildPageMetadata()`.
-
 ## Jazyk
 
 Jazyk sa vyjednáva **na serveri** zo `Accept-Language` hlavičky:
