@@ -9,7 +9,7 @@ import {
   PrimaryColumn,
   SplitGrid,
 } from '@/components/ui/layout/layout.styled';
-import { SPACING, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
+import { CONTENT_MAX_WIDTH, SPACING, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
 
 const FULL_HEIGHT = `calc(100vh - ${SPACING.xl2 * 2}px)`;
 
@@ -45,6 +45,10 @@ export const SplitLayout = ({
       maxWidth={false}
       disableGutters
       sx={{
+        maxWidth: {
+          xs: CONTENT_MAX_WIDTH + SPACING.xl2 * 2,
+          md: CONTENT_MAX_WIDTH + SPACING.xl8 * 2,
+        },
         px: {
           xs: `${SPACING.xl2}px`,
           md: `${SPACING.xl8}px`,

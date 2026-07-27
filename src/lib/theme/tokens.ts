@@ -58,6 +58,8 @@ export const SPACING = {
   xl8: 80,
 } as const;
 
+export const CONTENT_MAX_WIDTH = 1440;
+
 const SPLIT_LAYOUT_MIN_WIDTH = 1170;
 
 export const SPLIT_LAYOUT_MEDIA = `@media (min-width:${SPLIT_LAYOUT_MIN_WIDTH}px)`;
