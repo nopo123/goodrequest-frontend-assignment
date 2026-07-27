@@ -9,6 +9,7 @@ import {
   LAST_NAME_MAX_LENGTH,
   LAST_NAME_MIN_LENGTH,
   MAX_AMOUNT,
+  MAX_AMOUNT_DECIMALS,
   MIN_AMOUNT,
   PHONE_COUNTRY_CALLING_CODES,
 } from './constants';
@@ -118,6 +119,17 @@ export const donationSchema = z
         code: 'custom',
         path: ['amount'],
         message: 'validation.amount.invalid',
+      });
+      return;
+    }
+
+    const decimalDigits = normalizedAmount.split('.')[1]?.length ?? 0;
+
+    if (decimalDigits > MAX_AMOUNT_DECIMALS) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['amount'],
+        message: 'validation.amount.decimals',
       });
       return;
     }

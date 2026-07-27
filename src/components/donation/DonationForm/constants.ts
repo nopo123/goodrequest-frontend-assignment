@@ -13,6 +13,8 @@ export const MIN_AMOUNT = 1;
 
 export const MAX_AMOUNT = 100000;
 
+export const MAX_AMOUNT_DECIMALS = 2;
+
 export const FIRST_NAME_MIN_LENGTH = 2;
 
 export const FIRST_NAME_MAX_LENGTH = 20;

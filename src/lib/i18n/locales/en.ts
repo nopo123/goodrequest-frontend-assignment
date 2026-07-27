@@ -114,6 +114,7 @@ export const en: TranslationResource = {
     amount: {
       required: 'Choose the donation amount',
       invalid: 'Enter the amount as a number',
+      decimals: 'The amount can have at most {{decimals}} decimal places',
       min: 'The minimum amount is {{min}} €',
       max: 'The maximum amount is {{max}} €',
     },

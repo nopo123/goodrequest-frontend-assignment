@@ -10,6 +10,7 @@ import { ToggleGroupButtons } from '@/components/ui/ToggleGroupButtons/ToggleGro
 import {
   AMOUNT_PRESETS,
   MAX_AMOUNT,
+  MAX_AMOUNT_DECIMALS,
   MIN_AMOUNT,
 } from '@/components/donation/DonationForm/constants';
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
@@ -103,7 +104,7 @@ export const ShelterStep = ({
           error={translateFieldError(
             t,
             getDonationFieldError(errors, touched, 'amount'),
-            { min: MIN_AMOUNT, max: MAX_AMOUNT },
+            { min: MIN_AMOUNT, max: MAX_AMOUNT, decimals: MAX_AMOUNT_DECIMALS },
           )}
           selectedPreset={selectedPreset}
           formatPresetLabel={(preset) => `${preset} ${CURRENCY_SYMBOL}`}

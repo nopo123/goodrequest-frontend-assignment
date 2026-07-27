@@ -112,6 +112,7 @@ export const sk = {
     amount: {
       required: 'Zvoľte výšku príspevku',
       invalid: 'Zadajte sumu ako číslo',
+      decimals: 'Suma môže mať najviac {{decimals}} desatinné miesta',
       min: 'Minimálna suma je {{min}} €',
       max: 'Maximálna suma je {{max}} €',
     },

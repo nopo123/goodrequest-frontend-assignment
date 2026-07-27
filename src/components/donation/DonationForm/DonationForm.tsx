@@ -106,7 +106,7 @@ export const DonationForm = ({ t, locale, shelters }: DonationFormProps) => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isSubmitLocked) return;
+    if (!isLastStep || isSubmitLocked) return;
 
     setHasAttemptedSubmit(true);
     formik.setStatus(undefined);
