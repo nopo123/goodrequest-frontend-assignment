@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { resolveRequestLanguage } from '@/lib/i18n/server';
-import { AppProviders } from '@/lib/providers/AppProviders';
+import { AppProviders } from '@/providers/AppProviders';
 import { buildRootMetadata } from '@/lib/seo/seo';
 import { COLORS } from '@/lib/theme/tokens';
 

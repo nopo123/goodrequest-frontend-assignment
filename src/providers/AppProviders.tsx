@@ -8,9 +8,9 @@ import type { ReactNode } from 'react';
 import { DonationSubmissionProvider } from '@/context/DonationSubmissionContext';
 import type { Language } from '@/types/i18n';
 
-import { I18nProvider } from '../i18n/I18nProvider';
-import { QueryProvider } from '../query/QueryProvider';
-import { muiTheme } from '../theme/mui-theme';
+import { I18nProvider } from '../lib/i18n/I18nProvider';
+import { QueryProvider } from '../lib/query/QueryProvider';
+import { muiTheme } from '../lib/theme/mui-theme';
 
 type AppProvidersProps = {
   readonly language: Language;
