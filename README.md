@@ -99,17 +99,17 @@ src/
     ui/           generické, doménovo nezávislé komponenty (+ ui/layout/)
   config/         navigation.ts, social.ts
   context/        DonationStepContext, DonationSubmissionContext
-  hooks/          hooky zoskupené po doménach (donation/, shelters/, stats/, form/, navigation/)
+  hooks/          hooky zoskupené po doménach (donation/, shelters/, stats/, navigation/, ui/)
   lib/
     lib.ts        axios instance (baseURL z env, mapovanie chýb na ApiError)
     i18n/         i18next konfigurácia a preklady (sk, en)
     query/        QueryClient provider a query keys
     seo/          SITE_URL, zdieľané openGraph/twitter polia, buildPageMetadata()
     theme/        MUI theme, design tokeny, typografia
-    providers/    kompozícia všetkých providerov
+  providers/      AppProviders — kompozícia všetkých providerov
   routes/         AppRoute enum a URL slovník
   types/          zdieľané typy AJ enumy
-  utils/          format.ts, zodFormikValidate.ts
+  utils/          format.ts, zodFormikValidate.ts, translateFieldError.ts
   views/          stránkové kompozície, ktoré routy v app/ iba obalia
 ```
 

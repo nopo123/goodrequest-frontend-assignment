@@ -247,12 +247,13 @@ export const muiTheme = createTheme({
     MuiStepLabel: {
       styleOverrides: {
         label: {
-          fontSize: '0.9375rem',
-          fontWeight: 500,
-          color: COLORS.textTertiary,
+          fontSize: '1rem',
+          lineHeight: 24 / 16,
+          fontWeight: 400,
+          letterSpacing: 0,
+          color: COLORS.textPrimary,
           '&.Mui-active': {
             fontWeight: 600,
-            color: COLORS.textPrimary,
           },
           '&.Mui-completed': {
             color: COLORS.textSecondary,

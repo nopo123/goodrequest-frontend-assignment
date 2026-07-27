@@ -8,10 +8,19 @@ import { pxToRem } from '@/lib/theme/typography';
 
 const UNIT_GAP = 10;
 
+const DISPLAY_FONT_SIZE_BASE = 40;
+
+const DISPLAY_FONT_SIZE_SM = 48;
+
+const DISPLAY_FONT_SIZE_MD = 60;
+
 type NumberFieldRowProps = {
   readonly hasError: boolean;
   readonly fieldWidth: number;
 };
+
+const scaledFieldWidth = (fieldWidth: number, fontSize: number): number =>
+  Math.round((fieldWidth * fontSize) / DISPLAY_FONT_SIZE_BASE);
 
 export const NumberFieldRoot = styled(Stack)({
   alignItems: 'center',
@@ -30,6 +39,12 @@ export const NumberFieldRow = styled(Box, {
     hasError ? theme.palette.error.main : theme.palette.primary.main
   }`,
   transition: theme.transitions.create('border-color'),
+  [theme.breakpoints.up('sm')]: {
+    width: `min(${scaledFieldWidth(fieldWidth, DISPLAY_FONT_SIZE_SM)}px, 100%)`,
+  },
+  [theme.breakpoints.up('md')]: {
+    width: `min(${scaledFieldWidth(fieldWidth, DISPLAY_FONT_SIZE_MD)}px, 100%)`,
+  },
 }));
 
 export const NumberFieldInput = styled(InputBase)(({ theme }) => ({
