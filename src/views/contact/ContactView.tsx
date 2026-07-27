@@ -75,10 +75,7 @@ export const ContactView = () => {
                 title={t(channel.titleKey)}
                 description={t(channel.subtitleKey)}
               >
-                <LinkOrText
-                  value={value}
-                  href={channel.buildHref?.(value)}
-                />
+                <LinkOrText value={value} href={channel.buildHref?.(value)} />
               </IconCard>
             );
           })}

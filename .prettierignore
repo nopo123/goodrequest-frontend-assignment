@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# build output
+.next/
+out/
+build/
+coverage/
+
+# generated
+next-env.d.ts
+*.tsbuildinfo
+package-lock.json
+
+# kept verbatim
+ASSIGNMENT.md
+CLAUDE.md
+AGENTS.md

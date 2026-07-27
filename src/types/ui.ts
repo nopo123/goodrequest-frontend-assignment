@@ -1,3 +1,8 @@
+export enum MessageTone {
+  BRAND = 'BRAND',
+  ERROR = 'ERROR',
+}
+
 export type StepperItem = {
   readonly id: string | number;
   readonly label: string;

@@ -15,10 +15,7 @@ type ToggleGroupRootProps = {
 
 export const ToggleGroupRoot = styled(ToggleButtonGroup, {
   shouldForwardProp: (prop) =>
-    prop !== 'columns' &&
-    prop !== 'framed' &&
-    prop !== 'pill' &&
-    prop !== 'groupHeight',
+    prop !== 'columns' && prop !== 'framed' && prop !== 'pill' && prop !== 'groupHeight',
 })<ToggleGroupRootProps>(({ theme, columns, framed, pill, groupHeight }) => ({
   minHeight: groupHeight,
   '& .MuiToggleButton-root': {

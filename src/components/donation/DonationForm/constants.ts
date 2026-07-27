@@ -1,4 +1,9 @@
-import { DonationStep, DonationType, PhoneCountry } from '@/types/donation';
+import {
+  DonationStep,
+  DonationStepSlug,
+  DonationType,
+  PhoneCountry,
+} from '@/types/donation';
 
 export const AMOUNT_PRESETS = [5, 10, 20, 30, 50, 100] as const;
 
@@ -24,6 +29,18 @@ export const DONATION_STEP_ORDER = [
   DonationStep.SHELTER,
   DonationStep.DONOR,
   DonationStep.SUMMARY,
+] as const;
+
+export const DONATION_STEP_SLUGS: Readonly<Record<DonationStep, DonationStepSlug>> = {
+  [DonationStep.SHELTER]: DonationStepSlug.SHELTER,
+  [DonationStep.DONOR]: DonationStepSlug.DONOR,
+  [DonationStep.SUMMARY]: DonationStepSlug.SUMMARY,
+};
+
+export const DONATION_STEP_SLUG_ORDER = [
+  DonationStepSlug.SHELTER,
+  DonationStepSlug.DONOR,
+  DonationStepSlug.SUMMARY,
 ] as const;
 
 export const PHONE_COUNTRY_CALLING_CODES: Readonly<Record<PhoneCountry, string>> = {

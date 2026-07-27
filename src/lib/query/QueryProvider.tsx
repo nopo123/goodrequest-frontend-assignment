@@ -19,9 +19,7 @@ const createQueryClient = () =>
         refetchOnWindowFocus: false,
         retry: (failureCount, error) => {
           const isClientError =
-            error instanceof ApiError &&
-            error.status !== undefined &&
-            error.status < 500;
+            error instanceof ApiError && error.status !== undefined && error.status < 500;
           if (isClientError) return false;
           return failureCount < RETRYABLE_ATTEMPTS;
         },
@@ -35,7 +33,5 @@ const createQueryClient = () =>
 export const QueryProvider = ({ children }: QueryProviderProps) => {
   const [queryClient] = useState(createQueryClient);
 
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 };

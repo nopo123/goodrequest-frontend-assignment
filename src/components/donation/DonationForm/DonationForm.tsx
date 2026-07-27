@@ -1,44 +1,45 @@
-"use client";
+'use client';
 
-import Alert from "@mui/material/Alert";
-import Snackbar from "@mui/material/Snackbar";
-import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
-import { useTranslation } from "react-i18next";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import { useState, type FormEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { DonationFormActions } from "@/components/donation/DonationFormActions/DonationFormActions";
-import { DonorStep } from "@/components/donation/steps/DonorStep/DonorStep";
-import { ShelterStep } from "@/components/donation/steps/ShelterStep/ShelterStep";
-import { SummaryStep } from "@/components/donation/steps/SummaryStep/SummaryStep";
-import { FormStepper } from "@/components/ui/FormStepper/FormStepper";
-import { useDonationStep } from "@/context/DonationStepContext";
-import { useDonationSubmission } from "@/context/DonationSubmissionContext";
-import { AppRoute } from "@/routes/routes";
-import { DONATION_STEP_ORDER } from "./constants";
+import { DonationFormActions } from '@/components/donation/DonationFormActions/DonationFormActions';
+import { DonorStep } from '@/components/donation/steps/DonorStep/DonorStep';
+import { ShelterStep } from '@/components/donation/steps/ShelterStep/ShelterStep';
+import { SummaryStep } from '@/components/donation/steps/SummaryStep/SummaryStep';
+import { FormStepper } from '@/components/ui/FormStepper/FormStepper';
+import { useDonationStep } from '@/context/DonationStepContext';
+import { useDonationSubmission } from '@/context/DonationSubmissionContext';
+import { AppRoute } from '@/routes/routes';
+import { DONATION_STEP_ORDER } from './constants';
 import {
   buildContributePayload,
   createInitialDonationValues,
   createInitialDonorValues,
-} from "./payload";
-import { donationSchema } from "./schema";
-import { buildStepTouched, hasStepErrors } from "../steps/steps";
-import { useSubmitContribution } from "@/hooks/donation/useSubmitContribution";
-import { ApiError } from "@/lib/lib";
+} from './payload';
+import { donationSchema } from './schema';
+import { buildStepTouched, hasStepErrors } from '../steps/steps';
+import { useDonationStepUrl } from '@/hooks/donation/useDonationStepUrl';
+import { useSubmitContribution } from '@/hooks/donation/useSubmitContribution';
+import { ApiError } from '@/lib/lib';
 import {
   DonationStep,
   type DonationFormValues,
   type DonorFormValues,
-} from "@/types/donation";
-import type { StepperItem } from "@/types/ui";
-import { zodFormikValidate } from "@/utils/zodFormikValidate";
+} from '@/types/donation';
+import type { StepperItem } from '@/types/ui';
+import { zodFormikValidate } from '@/utils/zodFormikValidate';
 
-import { ActionsSlot, FormRoot } from "./DonationForm.styled";
+import { ActionsSlot, FormRoot } from './DonationForm.styled';
 
 const STEP_LABEL_KEYS: Readonly<Record<DonationStep, string>> = {
-  [DonationStep.SHELTER]: "stepper.shelter",
-  [DonationStep.DONOR]: "stepper.donor",
-  [DonationStep.SUMMARY]: "stepper.confirmation",
+  [DonationStep.SHELTER]: 'stepper.shelter',
+  [DonationStep.DONOR]: 'stepper.donor',
+  [DonationStep.SUMMARY]: 'stepper.confirmation',
 };
 
 const validateDonation = zodFormikValidate<DonationFormValues>(donationSchema);
@@ -62,6 +63,8 @@ export const DonationForm = () => {
   const { markSubmitted } = useDonationSubmission();
   const { mutateAsync } = useSubmitContribution();
 
+  useDonationStepUrl(currentStep);
+
   const formik = useFormik<DonationFormValues>({
     initialValues: createInitialDonationValues(),
     validate: validateDonation,
@@ -74,7 +77,7 @@ export const DonationForm = () => {
         const message =
           submitFailure instanceof ApiError
             ? submitFailure.message
-            : t("errors.submitGeneric");
+            : t('errors.submitGeneric');
         setErrorMessage(message);
       }
     },
@@ -83,13 +86,11 @@ export const DonationForm = () => {
   const isStepRevealed = (step: DonationStep): boolean =>
     step < visitedStep || hasAttemptedSubmit;
 
-  const stepperItems: readonly StepperItem[] = DONATION_STEP_ORDER.map(
-    (step) => ({
-      id: step,
-      label: t(STEP_LABEL_KEYS[step]),
-      hasError: isStepRevealed(step) && hasStepErrors(step, formik.errors),
-    }),
-  );
+  const stepperItems: readonly StepperItem[] = DONATION_STEP_ORDER.map((step) => ({
+    id: step,
+    label: t(STEP_LABEL_KEYS[step]),
+    hasError: isStepRevealed(step) && hasStepErrors(step, formik.errors),
+  }));
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -101,9 +102,7 @@ export const DonationForm = () => {
     );
 
     if (firstInvalidStep !== undefined) {
-      await formik.setTouched(
-        buildStepTouched(firstInvalidStep, formik.values),
-      );
+      await formik.setTouched(buildStepTouched(firstInvalidStep, formik.values));
       goToStep(firstInvalidStep);
       return;
     }
@@ -130,7 +129,7 @@ export const DonationForm = () => {
     const nextDonors = formik.values.donors.map((donor, donorIndex) =>
       donorIndex === index ? { ...donor, [field]: value } : donor,
     );
-    void formik.setFieldValue("donors", nextDonors);
+    void formik.setFieldValue('donors', nextDonors);
   };
 
   return (
@@ -139,8 +138,8 @@ export const DonationForm = () => {
         items={stepperItems}
         activeIndex={currentStep}
         maxReachableIndex={visitedStep}
-        ariaLabel={t("stepper.label")}
-        errorLabel={t("stepper.hasError")}
+        ariaLabel={t('stepper.label')}
+        errorLabel={t('stepper.hasError')}
         onStepSelect={(index) => goToStep(index as DonationStep)}
       />
 
@@ -150,14 +149,12 @@ export const DonationForm = () => {
           errors={formik.errors}
           touched={formik.touched}
           onDonationTypeChange={(donationType) =>
-            void formik.setFieldValue("donationType", donationType)
+            void formik.setFieldValue('donationType', donationType)
           }
           onShelterChange={(shelterId) =>
-            void formik.setFieldValue("shelterId", shelterId)
+            void formik.setFieldValue('shelterId', shelterId)
           }
-          onAmountChange={(amount) =>
-            void formik.setFieldValue("amount", amount)
-          }
+          onAmountChange={(amount) => void formik.setFieldValue('amount', amount)}
           onFieldBlur={(field) => void formik.setFieldTouched(field, true)}
         />
       )}
@@ -172,17 +169,15 @@ export const DonationForm = () => {
             void formik.setFieldTouched(`donors.${index}.${field}`, true)
           }
           onAddDonor={() =>
-            void formik.setFieldValue("donors", [
+            void formik.setFieldValue('donors', [
               ...formik.values.donors,
               createInitialDonorValues(),
             ])
           }
           onRemoveDonor={(index) =>
             void formik.setFieldValue(
-              "donors",
-              formik.values.donors.filter(
-                (_donor, donorIndex) => donorIndex !== index,
-              ),
+              'donors',
+              formik.values.donors.filter((_donor, donorIndex) => donorIndex !== index),
             )
           }
         />
@@ -193,10 +188,8 @@ export const DonationForm = () => {
           values={formik.values}
           errors={formik.errors}
           touched={formik.touched}
-          onConsentChange={(consent) =>
-            void formik.setFieldValue("consent", consent)
-          }
-          onConsentBlur={() => void formik.setFieldTouched("consent", true)}
+          onConsentChange={(consent) => void formik.setFieldValue('consent', consent)}
+          onConsentBlur={() => void formik.setFieldTouched('consent', true)}
         />
       )}
 
@@ -213,14 +206,10 @@ export const DonationForm = () => {
       <Snackbar
         open={errorMessage !== null}
         autoHideDuration={ERROR_AUTO_HIDE_MS}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         onClose={() => setErrorMessage(null)}
       >
-        <Alert
-          severity="error"
-          variant="filled"
-          onClose={() => setErrorMessage(null)}
-        >
+        <Alert severity="error" variant="filled" onClose={() => setErrorMessage(null)}>
           {errorMessage}
         </Alert>
       </Snackbar>

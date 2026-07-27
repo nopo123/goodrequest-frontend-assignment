@@ -44,7 +44,9 @@ export const NumberField = ({
   return (
     <NumberFieldRoot spacing={1}>
       <NumberFieldRow hasError={hasError} fieldWidth={fieldWidth}>
-        {hasUnit && <NumberFieldUnitSpacer aria-hidden="true">{unit}</NumberFieldUnitSpacer>}
+        {hasUnit && (
+          <NumberFieldUnitSpacer aria-hidden="true">{unit}</NumberFieldUnitSpacer>
+        )}
 
         <NumberFieldInput
           id={id}

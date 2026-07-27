@@ -5,6 +5,7 @@ export const sk = {
     continue: 'Pokračovať',
     optional: 'Nepovinné',
     skipToContent: 'Preskočiť na obsah',
+    backToForm: 'Späť na formulár',
   },
   nav: {
     label: 'Hlavná navigácia',
@@ -73,6 +74,20 @@ export const sk = {
   errors: {
     submitGeneric: 'Skúste to prosím o chvíľu znova',
   },
+  notFound: {
+    title: 'Táto stránka neexistuje',
+    description:
+      'Adresu sme nenašli. Možno je v odkaze chyba alebo sa stránka presunula.',
+  },
+  errorPage: {
+    title: 'Niečo sa pokazilo',
+    description:
+      'Stránku sa nepodarilo zobraziť. Skúste to prosím znova, vaše údaje sme nikam neposlali.',
+    retry: 'Skúsiť znova',
+    digest: 'Kód chyby: {{digest}}',
+    fatalTitle: 'Aplikáciu sa nepodarilo spustiť',
+    fatalDescription: 'Skúste stránku obnoviť. Ak problém pretrvá, ozvite sa nám na',
+  },
   validation: {
     firstName: {
       min: 'Meno musí mať aspoň 2 znaky',
@@ -133,11 +148,15 @@ export const sk = {
     summaryStepTitle: 'Skontrolujte si zadané údaje',
     donateDescription:
       'Prispejte konkrétnemu útulku alebo celej nadácii Good Boy a pomôžte psom v Žiline nájsť domov',
+    donorStepDescription:
+      'Zadajte kontaktné údaje darcu, aby sme vám mohli poslať potvrdenie o príspevku nadácii Good Boy',
+    summaryStepDescription:
+      'Skontrolujte formu pomoci, výšku príspevku a svoje údaje pred odoslaním nadácii Good Boy',
     contactTitle: 'Kontakt',
     contactDescription: 'Kontaktné údaje nadácie Good Boy – e-mail, adresa a telefón',
     aboutTitle: 'O projekte',
     aboutDescription:
-      'Nadácia Good Boy zachraňuje opustené a týrané psy v Žiline a hľadá im milujúci domov',
+      'Nadácia Good Boy zachraňuje opustené a týrané psy a hľadá im milujúci domov',
   },
   imageAlt: {
     dogOnBeach: 'Šteňa kokršpaniela sediace na piesočnatej pláži',

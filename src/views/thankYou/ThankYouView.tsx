@@ -1,18 +1,17 @@
-"use client";
+'use client';
 
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import Typography from "@mui/material/Typography";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { SiteFooter } from "@/components/layout/SiteFooter/SiteFooter";
-import { SplitLayout } from "@/components/layout/SplitLayout/SplitLayout";
-import { useDonationSubmission } from "@/context/DonationSubmissionContext";
-import { useCountdownRedirect } from "@/hooks/navigation/useCountdownRedirect";
-import { AppRoute } from "@/routes/routes";
-
-import { HeartBadge, ThankYouStack } from "./ThankYouView.styled";
+import { SiteFooter } from '@/components/layout/SiteFooter/SiteFooter';
+import { SplitLayout } from '@/components/layout/SplitLayout/SplitLayout';
+import { MessagePanel } from '@/components/ui/MessagePanel/MessagePanel';
+import { useDonationSubmission } from '@/context/DonationSubmissionContext';
+import { useCountdownRedirect } from '@/hooks/navigation/useCountdownRedirect';
+import { AppRoute } from '@/routes/routes';
 
 const REDIRECT_SECONDS = 7;
 
@@ -36,19 +35,15 @@ export const ThankYouView = () => {
 
   return (
     <SplitLayout footer={<SiteFooter />}>
-      <ThankYouStack spacing={3}>
-        <HeartBadge>
-          <FavoriteIcon fontSize="inherit" />
-        </HeartBadge>
-
-        <Typography variant="h1">{t("success.title")}</Typography>
-
-        <Typography variant="body1">{t("success.description")}</Typography>
-
+      <MessagePanel
+        icon={<FavoriteIcon fontSize="inherit" />}
+        title={t('success.title')}
+        description={t('success.description')}
+      >
         <Typography variant="body2">
-          {t("success.redirect", { seconds: secondsLeft })}
+          {t('success.redirect', { seconds: secondsLeft })}
         </Typography>
-      </ThankYouStack>
+      </MessagePanel>
     </SplitLayout>
   );
 };

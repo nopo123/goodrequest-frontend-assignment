@@ -3,6 +3,7 @@
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import type { RefCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { PhoneNumberField } from '@/components/ui/PhoneNumberField/PhoneNumberField';
@@ -33,6 +34,7 @@ type DonorFieldsetProps = {
   readonly errors: DonorFieldErrors;
   readonly isRemovable: boolean;
   readonly showTitle: boolean;
+  readonly ref?: RefCallback<HTMLElement>;
   readonly onFieldChange: <TField extends keyof DonorFormValues>(
     field: TField,
     value: DonorFormValues[TField],
@@ -47,6 +49,7 @@ export const DonorFieldset = ({
   errors,
   isRemovable,
   showTitle,
+  ref,
   onFieldChange,
   onFieldBlur,
   onRemove,
@@ -56,7 +59,7 @@ export const DonorFieldset = ({
   const donorNumber = index + 1;
 
   return (
-    <DonorFieldsetRoot component="fieldset" spacing={2}>
+    <DonorFieldsetRoot ref={ref} component="fieldset" spacing={2}>
       {showTitle && (
         <DonorHeaderRow direction="row" spacing={1}>
           <Typography component="legend" variant="h5">

@@ -9,6 +9,12 @@ export enum DonationStep {
   SUMMARY = 2,
 }
 
+export enum DonationStepSlug {
+  SHELTER = 'shelter',
+  DONOR = 'donor',
+  SUMMARY = 'summary',
+}
+
 export enum PhoneCountry {
   SK = 'SK',
   CZ = 'CZ',

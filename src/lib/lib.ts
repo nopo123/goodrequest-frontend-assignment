@@ -28,13 +28,9 @@ const axiosInstance = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-const resolveErrorMessage = (
-  error: AxiosError<Partial<ApiMessagesResponse>>,
-): string => {
+const resolveErrorMessage = (error: AxiosError<Partial<ApiMessagesResponse>>): string => {
   const messages = error.response?.data?.messages ?? [];
-  const errorMessage = messages.find(
-    (message) => message.type === ApiMessageType.ERROR,
-  );
+  const errorMessage = messages.find((message) => message.type === ApiMessageType.ERROR);
 
   return errorMessage?.message ?? messages[0]?.message ?? error.message;
 };
@@ -42,9 +38,7 @@ const resolveErrorMessage = (
 axiosInstance.interceptors.response.use(
   (response) => response.data,
   (error: AxiosError<Partial<ApiMessagesResponse>>) =>
-    Promise.reject(
-      new ApiError(resolveErrorMessage(error), error.response?.status),
-    ),
+    Promise.reject(new ApiError(resolveErrorMessage(error), error.response?.status)),
 );
 
 export default axiosInstance;

@@ -1,4 +1,4 @@
-import type { sk } from "../lib/i18n/locales/sk";
+import type { sk } from '../lib/i18n/locales/sk';
 
 type LocaleShape<TSource> = {
   readonly [TKey in keyof TSource]: TSource[TKey] extends string

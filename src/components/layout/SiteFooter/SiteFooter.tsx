@@ -30,7 +30,12 @@ export const SiteFooter = () => {
       <FooterRow direction={{ xs: 'column', sm: 'row' }} spacing={2}>
         <BrandLogo />
 
-        <FooterNav component="nav" aria-label={t('nav.label')} direction="row" spacing={3}>
+        <FooterNav
+          component="nav"
+          aria-label={t('nav.label')}
+          direction="row"
+          spacing={3}
+        >
           <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center' }}>
             {SOCIAL_LINKS.map((social) => {
               const Icon = SOCIAL_ICONS[social.id];

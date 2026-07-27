@@ -17,6 +17,7 @@ import { getDonorFieldError } from '@/components/donation/DonationForm/errors';
 import { DonorFieldset } from '@/components/donation/DonorFieldset/DonorFieldset';
 import { ScrollArea } from '@/components/ui/ScrollArea/ScrollArea';
 import { useTranslateFieldError } from '@/hooks/form/useTranslateFieldError';
+import { useScrollIntoViewOnGrow } from '@/hooks/ui/useScrollIntoViewOnGrow';
 import type { DonationFormValues, DonorFormValues } from '@/types/donation';
 
 type DonorStepProps = {
@@ -45,8 +46,11 @@ export const DonorStep = ({
   const { t } = useTranslation();
   const translateError = useTranslateFieldError();
 
-  const hasMultipleDonors = values.donors.length > 1;
-  const canAddDonor = values.donors.length < MAX_DONORS;
+  const donorCount = values.donors.length;
+  const hasMultipleDonors = donorCount > 1;
+  const canAddDonor = donorCount < MAX_DONORS;
+  const lastDonorIndex = donorCount - 1;
+  const setLastDonorNode = useScrollIntoViewOnGrow(donorCount);
 
   return (
     <Stack spacing={5}>
@@ -66,6 +70,7 @@ export const DonorStep = ({
               <Fragment key={index}>
                 {index > 0 && <Divider />}
                 <DonorFieldset
+                  ref={index === lastDonorIndex ? setLastDonorNode : undefined}
                   index={index}
                   donor={donor}
                   showTitle={hasMultipleDonors}

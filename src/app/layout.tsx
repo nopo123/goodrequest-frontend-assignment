@@ -1,40 +1,40 @@
-import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
-import type { ReactNode } from "react";
+import type { Metadata, Viewport } from 'next';
+import { Inter } from 'next/font/google';
+import type { ReactNode } from 'react';
 
-import { AppProviders } from "@/lib/providers/AppProviders";
+import { AppProviders } from '@/lib/providers/AppProviders';
+import {
+  OPEN_GRAPH_BASE,
+  SEO_STRINGS,
+  SITE_NAME,
+  SITE_URL,
+  TWITTER_BASE,
+} from '@/lib/seo/seo';
+import { COLORS } from '@/lib/theme/tokens';
 
 const inter = Inter({
-  variable: "--font-app-sans",
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
+  variable: '--font-app-sans',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Nadácia Good boy",
-    template: "%s | Nadácia Good boy",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Prispejte konkrétnemu útulku alebo celej nadácii Good boy a pomôžte psom nájsť domov",
+  description: SEO_STRINGS.donateDescription,
   openGraph: {
-    type: "website",
-    locale: "sk_SK",
-    siteName: "Nadácia Good boy",
-    title: "Nadácia Good boy",
-    description:
-      "Prispejte konkrétnemu útulku alebo celej nadácii Good boy a pomôžte psom v Žiline nájsť domov",
+    ...OPEN_GRAPH_BASE,
+    title: SITE_NAME,
+    description: SEO_STRINGS.donateDescription,
   },
-  twitter: {
-    card: "summary_large_image",
-  },
+  twitter: TWITTER_BASE,
 };
 
 export const viewport: Viewport = {
-  themeColor: "#4F46E5",
+  themeColor: COLORS.primary,
 };
 
 type RootLayoutProps = {
