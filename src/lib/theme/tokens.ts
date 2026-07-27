@@ -1,23 +1,27 @@
 export const COLORS = {
-  primary: '#1F6FEB',
-  primaryDark: '#1552B8',
-  primaryLight: '#E9F1FE',
-  accent: '#F5A524',
-  accentLight: '#FEF3E0',
+  primary: '#4F46E5',
+  primaryDark: '#4338CA',
+  primaryDarker: '#3730A3',
+  primaryLight: '#EEF2FF',
+  primarySoft: '#E0E7FF',
+  accent: '#4F46E5',
+  accentLight: '#EEF2FF',
   textPrimary: '#101828',
-  textSecondary: '#5B6B82',
-  textDisabled: '#98A5B8',
-  border: '#DEE4ED',
-  borderStrong: '#C3CDDB',
+  textSecondary: '#475467',
+  textTertiary: '#667085',
+  textDisabled: '#98A2B3',
+  border: '#D0D5DD',
+  borderSubtle: '#EAECF0',
   surface: '#FFFFFF',
-  surfaceMuted: '#F6F8FC',
-  background: '#F2F5FA',
-  success: '#12805C',
-  successLight: '#E4F5EF',
-  error: '#D62D4B',
-  errorLight: '#FDEBEE',
-  warning: '#B76E00',
-  info: '#1F6FEB',
+  surfaceMuted: '#F9FAFB',
+  surfaceSunken: '#F2F4F7',
+  background: '#FFFFFF',
+  success: '#079455',
+  successLight: '#ECFDF3',
+  error: '#D92D20',
+  errorLight: '#FEF3F2',
+  warning: '#DC6803',
+  info: '#4F46E5',
 } as const;
 
 export const RADII = {
@@ -29,9 +33,10 @@ export const RADII = {
 } as const;
 
 export const SHADOWS = {
-  card: '0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06)',
-  raised: '0 8px 32px rgba(16, 24, 40, 0.12)',
-  focus: `0 0 0 4px rgba(31, 111, 235, 0.16)`,
+  xs: '0 1px 2px rgba(16, 24, 40, 0.05)',
+  card: '0 1px 3px rgba(16, 24, 40, 0.10), 0 1px 2px rgba(16, 24, 40, 0.06)',
+  raised: '0 12px 16px -4px rgba(16, 24, 40, 0.08), 0 4px 6px -2px rgba(16, 24, 40, 0.03)',
+  focus: '0 0 0 4px rgba(79, 70, 229, 0.24)',
 } as const;
 
 export const TRANSITIONS = {
@@ -49,10 +54,12 @@ export const BREAKPOINTS = {
 
 export const SPACING_UNIT = 8;
 
-export const CONTENT_MAX_WIDTH = '1120px';
+export const CONTENT_MAX_WIDTH = '1280px';
+
+export const DESIGN_FRAME_WIDTH = 1440;
 
 export const FONT_FAMILY =
-  "var(--font-app-sans), 'Segoe UI', system-ui, -apple-system, sans-serif";
+  "var(--font-app-sans), 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif";
 
 export const media = {
   tablet: `@media (min-width: ${BREAKPOINTS.tablet}px)`,
