@@ -1,13 +1,16 @@
-import { ApiEndpoint, HttpMethod } from './config';
+import { ApiEndpoint, HttpMethod } from '@/enums/api.enums';
+import type {
+  ContributePayload,
+  ContributeResponse,
+  ContributionResults,
+  Shelter,
+} from '@/types/api.types';
+
 import { request } from './http';
 import {
   contributeResponseSchema,
   contributionResultsSchema,
   sheltersResponseSchema,
-  type ContributePayload,
-  type ContributeResponse,
-  type ContributionResults,
-  type Shelter,
 } from './schemas';
 
 export const fetchShelters = async (

@@ -1,7 +1,9 @@
 import type { ZodType } from 'zod';
 
-import { API_BASE_URL, HttpMethod } from './config';
-import { ApiMessageType, contributeResponseSchema } from './schemas';
+import { ApiMessageType, HttpMethod } from '@/enums/api.enums';
+
+import { API_BASE_URL } from './config';
+import { contributeResponseSchema } from './schemas';
 
 type QueryParams = Readonly<Record<string, string | number | undefined | null>>;
 
