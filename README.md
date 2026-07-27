@@ -123,17 +123,6 @@ Appka konzumuje 3 endpointy hosťovaného API (dokumentácia: https://frontend-a
 - `GET /api/v1/shelters/results` — celková vyzbieraná suma a počet darcov
 - `POST /api/v1/shelters/contribute` — odoslanie príspevku
 
-## SEO
-
-- **og:image** — `public/og-image.jpg` (1200×630), spolu s `og:image:width/height/alt` a `twitter:image`. Deklarovaný je ako jeden zdieľaný obrázok v `lib/seo/seo.ts`, takže ho dostanú všetky routy vrátane 404.
-- **Rôzne titles a descriptions na jednotlivých stepoch formuláru** — `/donation` exportuje `generateMetadata`, ktoré číta `?step=` z URL a podľa neho vyberá titulok aj description z `meta.*` kľúčov v prekladoch. Klientský hook `useDonationStepUrl` zapisuje aktuálny step do URL, takže:
-  - prvý step má čistú adresu `/donation`, ďalšie `?step=donor` a `?step=summary`,
-  - zdieľaný odkaz na konkrétny step vyrenderuje serverom správny `<title>` a `description`,
-  - neznáma hodnota parametra spadne na prvý step.
-- **canonical** vždy smeruje na adresu bez query parametra, aby stepy netvorili duplicitný obsah.
-- **`robots.ts`** a **`sitemap.ts`** — generované z `AppRoute` enumu, `/thank-you` je vylúčené z indexovania.
-- **Metadata sú lokalizované** — titulok, description, `og:locale` aj názov nadácie sa vyberajú podľa jazyka vyjednaného zo `Accept-Language` (viď sekcia Jazyk).
-
 ## Jazyk
 
 Jazyk sa vyjednáva **na serveri** zo `Accept-Language` hlavičky:
