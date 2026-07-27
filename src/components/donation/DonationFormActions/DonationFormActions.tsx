@@ -13,6 +13,7 @@ type DonationFormActionsProps = {
   readonly isSubmitting: boolean;
   readonly onBack: () => void;
   readonly onNext: () => void;
+  readonly step: number;
 };
 
 export const DonationFormActions = ({
@@ -21,20 +22,28 @@ export const DonationFormActions = ({
   isSubmitting,
   onBack,
   onNext,
+  step,
 }: DonationFormActionsProps) => {
   const { t } = useTranslation();
+  const hasBackButton = step !== 0;
 
   return (
-    <ActionsRow direction="row" spacing={2}>
-      <BackButton
-        type="button"
-        variant="text"
-        startIcon={<ArrowBackIcon />}
-        disabled={isBackDisabled || isSubmitting}
-        onClick={onBack}
-      >
-        {t('common.back')}
-      </BackButton>
+    <ActionsRow
+      direction="row"
+      spacing={2}
+      sx={{ justifyContent: hasBackButton ? 'space-between' : 'flex-end' }}
+    >
+      {hasBackButton && (
+        <BackButton
+          type="button"
+          variant="text"
+          startIcon={<ArrowBackIcon />}
+          disabled={isBackDisabled || isSubmitting}
+          onClick={onBack}
+        >
+          {t('common.back')}
+        </BackButton>
+      )}
 
       {isSubmitStep ? (
         <Button type="submit" variant="contained" size="large" loading={isSubmitting}>

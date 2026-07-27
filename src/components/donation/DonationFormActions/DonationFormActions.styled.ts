@@ -6,7 +6,6 @@ import { COLORS } from '@/lib/theme/tokens';
 
 export const ActionsRow = styled(Stack)({
   alignItems: 'center',
-  justifyContent: 'space-between',
 }) as typeof Stack;
 
 export const BackButton = styled(Button)({

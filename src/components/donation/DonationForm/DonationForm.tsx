@@ -1,7 +1,5 @@
 'use client';
 
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
@@ -44,12 +42,9 @@ const STEP_LABEL_KEYS: Readonly<Record<DonationStep, string>> = {
 
 const validateDonation = zodFormikValidate<DonationFormValues>(donationSchema);
 
-const ERROR_AUTO_HIDE_MS = 5000;
-
 export const DonationForm = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   const [isSubmitPending, setIsSubmitPending] = useState(false);
   const {
@@ -69,16 +64,16 @@ export const DonationForm = () => {
   const formik = useFormik<DonationFormValues>({
     initialValues: createInitialDonationValues(),
     validate: validateDonation,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { setStatus }) => {
       try {
         await mutateAsync(buildContributePayload(values));
         router.push(AppRoute.THANK_YOU);
       } catch (submitFailure) {
-        const message =
+        setStatus(
           submitFailure instanceof ApiError
             ? submitFailure.message
-            : t('errors.submitGeneric');
-        setErrorMessage(message);
+            : t('errors.submitGeneric'),
+        );
         setIsSubmitPending(false);
       }
     },
@@ -222,19 +217,9 @@ export const DonationForm = () => {
           isSubmitting={isSubmitPending}
           onBack={handleBack}
           onNext={handleNext}
+          step={currentStep}
         />
       </ActionsSlot>
-
-      <Snackbar
-        open={errorMessage !== null}
-        autoHideDuration={ERROR_AUTO_HIDE_MS}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        onClose={() => setErrorMessage(null)}
-      >
-        <Alert severity="error" variant="filled" onClose={() => setErrorMessage(null)}>
-          {errorMessage}
-        </Alert>
-      </Snackbar>
     </FormRoot>
   );
 };
