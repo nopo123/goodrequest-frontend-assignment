@@ -46,7 +46,6 @@ export const DonationForm = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
-  const [isSubmitPending, setIsSubmitPending] = useState(false);
   const {
     currentStep,
     visitedStep,
@@ -74,13 +73,17 @@ export const DonationForm = () => {
             ? submitFailure.message
             : t('errors.submitGeneric'),
         );
-        setIsSubmitPending(false);
+        goToStep(DonationStep.SUMMARY);
       }
     },
   });
 
+  const { isSubmitting, status } = formik;
+  const submitError = typeof status === 'string' ? status : undefined;
+
   const resetSubmitAttempt = () => {
     setHasAttemptedSubmit(false);
+    formik.setStatus(undefined);
     void formik.setFieldTouched('consent', false);
   };
 
@@ -96,10 +99,10 @@ export const DonationForm = () => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isSubmitPending) return;
+    if (isSubmitting) return;
 
-    setIsSubmitPending(true);
     setHasAttemptedSubmit(true);
+    formik.setStatus(undefined);
 
     const validationErrors = await formik.validateForm();
     const firstInvalidStep = DONATION_STEP_ORDER.find((step) =>
@@ -109,7 +112,6 @@ export const DonationForm = () => {
     if (firstInvalidStep !== undefined) {
       await formik.setTouched(buildStepTouched(firstInvalidStep, formik.values));
       goToStep(firstInvalidStep);
-      setIsSubmitPending(false);
       return;
     }
 
@@ -205,6 +207,7 @@ export const DonationForm = () => {
           values={formik.values}
           errors={formik.errors}
           touched={formik.touched}
+          submitError={submitError}
           onConsentChange={(consent) => void formik.setFieldValue('consent', consent)}
           onConsentBlur={() => void formik.setFieldTouched('consent', true)}
         />
@@ -214,7 +217,7 @@ export const DonationForm = () => {
         <DonationFormActions
           isBackDisabled={isFirstStep}
           isSubmitStep={isLastStep}
-          isSubmitting={isSubmitPending}
+          isSubmitting={isSubmitting}
           onBack={handleBack}
           onNext={handleNext}
           step={currentStep}

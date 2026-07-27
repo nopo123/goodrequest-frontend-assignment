@@ -7,21 +7,12 @@ import type {
 } from '@/types/shelters';
 
 export const sheltersApi = {
-  getShelters: async (
-    search?: string,
-    signal?: AbortSignal,
-  ): Promise<SheltersResponseType> => {
-    return await api.get('/api/v1/shelters/', { params: { search }, signal });
+  getShelters: async (signal?: AbortSignal): Promise<SheltersResponseType> => {
+    return await api.get('/api/v1/shelters/', { signal });
   },
 
-  getResults: async (
-    search?: string,
-    signal?: AbortSignal,
-  ): Promise<ContributionResultsType> => {
-    return await api.get('/api/v1/shelters/results', {
-      params: { search },
-      signal,
-    });
+  getResults: async (signal?: AbortSignal): Promise<ContributionResultsType> => {
+    return await api.get('/api/v1/shelters/results', { signal });
   },
 
   contribute: async (body: ContributeDto): Promise<ApiMessagesResponse> => {

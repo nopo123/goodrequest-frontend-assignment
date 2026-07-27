@@ -1,5 +1,6 @@
 'use client';
 
+import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -26,6 +27,7 @@ type SummaryStepProps = {
   readonly values: DonationFormValues;
   readonly errors: FormikErrors<DonationFormValues>;
   readonly touched: FormikTouched<DonationFormValues>;
+  readonly submitError?: string;
   readonly onConsentChange: (consent: boolean) => void;
   readonly onConsentBlur: () => void;
 };
@@ -34,6 +36,7 @@ export const SummaryStep = ({
   values,
   errors,
   touched,
+  submitError,
   onConsentChange,
   onConsentBlur,
 }: SummaryStepProps) => {
@@ -99,15 +102,19 @@ export const SummaryStep = ({
 
           <SectionDivider />
 
-          <CheckboxField
-            id={CONSENT_FIELD_ID}
-            name={CONSENT_FIELD_ID}
-            label={t('summaryStep.consent')}
-            isChecked={values.consent}
-            error={consentError}
-            onChange={onConsentChange}
-            onBlur={onConsentBlur}
-          />
+          <Stack spacing={2}>
+            <CheckboxField
+              id={CONSENT_FIELD_ID}
+              name={CONSENT_FIELD_ID}
+              label={t('summaryStep.consent')}
+              isChecked={values.consent}
+              error={consentError}
+              onChange={onConsentChange}
+              onBlur={onConsentBlur}
+            />
+
+            {submitError !== undefined && <Alert severity="error">{submitError}</Alert>}
+          </Stack>
         </Box>
       </Stack>
     </Stack>

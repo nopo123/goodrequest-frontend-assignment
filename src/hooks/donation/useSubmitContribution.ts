@@ -32,7 +32,7 @@ export const useSubmitContribution = ({
     mutationFn: sheltersApi.contribute,
     onSuccess: () => {
       void queryClient.invalidateQueries({
-        queryKey: queryKeys.sheltersResultsPrefix,
+        queryKey: queryKeys.sheltersResults,
       });
       markSubmitted();
     },

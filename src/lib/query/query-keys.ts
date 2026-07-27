@@ -1,5 +1,6 @@
+const SHELTERS_ROOT = 'shelters';
+
 export const queryKeys = {
-  shelters: (search?: string) => ['shelters', search ?? ''] as const,
-  sheltersResults: (search?: string) => ['shelters', 'results', search ?? ''] as const,
-  sheltersResultsPrefix: ['shelters', 'results'] as const,
+  sheltersList: [SHELTERS_ROOT, 'list'] as const,
+  sheltersResults: [SHELTERS_ROOT, 'results'] as const,
 } as const;

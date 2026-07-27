@@ -6,7 +6,9 @@ import type { AppRoute } from '@/routes/routes';
 import { Language } from '@/types/i18n';
 import type { TranslationResource } from '@/types/translation';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
+const DEFAULT_SITE_URL = 'http://localhost:8080';
+
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL;
 
 const TRANSLATIONS: Readonly<Record<Language, TranslationResource>> = {
   [Language.SK]: sk,
@@ -50,7 +52,7 @@ export const buildRootMetadata = (language: Language): Metadata => {
   const strings = getSeoStrings(language);
 
   return {
-    metadataBase: new URL(SITE_URL!),
+    metadataBase: new URL(SITE_URL),
     title: {
       default: strings.siteName,
       template: `%s | ${strings.siteName}`,
