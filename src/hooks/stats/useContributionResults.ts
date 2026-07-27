@@ -2,11 +2,11 @@
 
 import { useQuery } from '@tanstack/react-query';
 
-import { fetchContributionResults } from '@/lib/api/shelters.api';
+import { sheltersApi } from '@/api/shelters';
 import { queryKeys } from '@/lib/query/query-keys';
 
 export const useContributionResults = (search?: string) =>
   useQuery({
     queryKey: queryKeys.sheltersResults(search),
-    queryFn: ({ signal }) => fetchContributionResults(search, signal),
+    queryFn: ({ signal }) => sheltersApi.getResults(search, signal),
   });

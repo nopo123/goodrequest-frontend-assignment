@@ -3,7 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useState, type ReactNode } from 'react';
 
-import { ApiError } from '../api/http';
+import { ApiError } from '../lib';
 
 const RETRYABLE_ATTEMPTS = 2;
 
@@ -18,7 +18,11 @@ const createQueryClient = () =>
         staleTime: 60_000,
         refetchOnWindowFocus: false,
         retry: (failureCount, error) => {
-          if (error instanceof ApiError && error.status < 500) return false;
+          const isClientError =
+            error instanceof ApiError &&
+            error.status !== undefined &&
+            error.status < 500;
+          if (isClientError) return false;
           return failureCount < RETRYABLE_ATTEMPTS;
         },
       },

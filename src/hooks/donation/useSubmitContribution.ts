@@ -2,14 +2,14 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { postContribution } from '@/lib/api/shelters.api';
+import { sheltersApi } from '@/api/shelters';
 import { queryKeys } from '@/lib/query/query-keys';
 
 export const useSubmitContribution = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postContribution,
+    mutationFn: sheltersApi.contribute,
     onSuccess: () => {
       void queryClient.invalidateQueries({
         queryKey: queryKeys.sheltersResultsPrefix,
