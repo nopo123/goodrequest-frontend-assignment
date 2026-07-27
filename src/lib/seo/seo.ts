@@ -50,7 +50,7 @@ export const buildRootMetadata = (language: Language): Metadata => {
   const strings = getSeoStrings(language);
 
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(SITE_URL!),
     title: {
       default: strings.siteName,
       template: `%s | ${strings.siteName}`,
