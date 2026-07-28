@@ -3,7 +3,7 @@ import {
   type DonationFormValues,
   type DonorFormValues,
 } from '@/types/donation';
-import type { ContributeDto } from '@/types/shelters';
+import type { ContributeDto, ContributorType } from '@/types/shelters';
 
 import {
   DEFAULT_AMOUNT,
@@ -34,13 +34,19 @@ export const parseAmount = (amount: string): number =>
 export const buildFullPhoneNumber = (donor: DonorFormValues): string =>
   `${PHONE_COUNTRY_CALLING_CODES[donor.phoneCountry]}${donor.phone.replace(/\s/g, '')}`;
 
-export const buildContributePayload = (values: DonationFormValues): ContributeDto => ({
-  contributors: values.donors.map((donor) => ({
-    firstName: donor.firstName.trim(),
+const buildContributor = (donor: DonorFormValues): ContributorType => {
+  const firstName = donor.firstName.trim();
+
+  return {
+    ...(firstName.length === 0 ? null : { firstName }),
     lastName: donor.lastName.trim(),
     email: donor.email.trim(),
     phone: buildFullPhoneNumber(donor),
-  })),
+  };
+};
+
+export const buildContributePayload = (values: DonationFormValues): ContributeDto => ({
+  contributors: values.donors.map(buildContributor),
   shelterID:
     values.donationType === DonationType.SPECIFIC_SHELTER ? values.shelterId : null,
   value: parseAmount(values.amount),

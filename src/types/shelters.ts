@@ -13,7 +13,7 @@ export type ContributionResultsType = {
 };
 
 export type ContributorType = {
-  readonly firstName: string;
+  readonly firstName?: string;
   readonly lastName: string;
   readonly email: string;
   readonly phone?: string | null;

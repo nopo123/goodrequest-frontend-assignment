@@ -79,10 +79,10 @@ export const DonorFieldset = ({
 
       <TwoColumnGrid>
         <TextInputField
-          isRequired
           id={`donors.${index}.firstName`}
           name={`donors.${index}.firstName`}
           label={t('donorStep.firstName')}
+          optionalHint={t('common.optional')}
           placeholder={t('donorStep.firstNamePlaceholder')}
           autoComplete="given-name"
           value={donor.firstName}

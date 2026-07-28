@@ -23,9 +23,6 @@ const donorSchema = z
   .object({
     firstName: z
       .string()
-      .refine((value) => value.trim().length > 0, {
-        message: 'validation.firstName.required',
-      })
       .refine(
         (value) =>
           value.trim().length === 0 || value.trim().length >= FIRST_NAME_MIN_LENGTH,
