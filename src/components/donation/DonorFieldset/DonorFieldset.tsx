@@ -79,6 +79,7 @@ export const DonorFieldset = ({
 
       <TwoColumnGrid>
         <TextInputField
+          isRequired
           id={`donors.${index}.firstName`}
           name={`donors.${index}.firstName`}
           label={t('donorStep.firstName')}

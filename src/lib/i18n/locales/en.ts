@@ -92,6 +92,7 @@ export const en: TranslationResource = {
   },
   validation: {
     firstName: {
+      required: 'First name is required',
       min: 'First name must be at least 2 characters',
       max: 'First name can be at most 20 characters',
     },

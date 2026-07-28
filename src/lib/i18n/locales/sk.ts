@@ -90,6 +90,7 @@ export const sk = {
   },
   validation: {
     firstName: {
+      required: 'Meno je povinné',
       min: 'Meno musí mať aspoň 2 znaky',
       max: 'Meno môže mať najviac 20 znakov',
     },
