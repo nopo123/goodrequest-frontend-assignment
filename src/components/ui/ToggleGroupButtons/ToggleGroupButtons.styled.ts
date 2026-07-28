@@ -1,8 +1,10 @@
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
 
-import { COLORS, RADII, SPACING } from '@/lib/theme/tokens';
+import { COLORS, COMPACT_HEIGHT_MEDIA, RADII, SPACING } from '@/lib/theme/tokens';
 import type { ToggleGroupColumns } from '@/types/ui';
+
+const COMPACT_GROUP_HEIGHT = 48;
 
 type ToggleGroupRootProps = {
   readonly columns?: ToggleGroupColumns;
@@ -20,6 +22,14 @@ export const ToggleGroupRoot = styled(ToggleButtonGroup, {
     minHeight: framed ? groupHeight - SPACING.xs * 2 : groupHeight,
     paddingTop: 0,
     paddingBottom: 0,
+  },
+  [COMPACT_HEIGHT_MEDIA]: {
+    minHeight: Math.min(groupHeight, COMPACT_GROUP_HEIGHT),
+    '& .MuiToggleButton-root': {
+      minHeight: framed
+        ? Math.min(groupHeight, COMPACT_GROUP_HEIGHT) - SPACING.xs * 2
+        : Math.min(groupHeight, COMPACT_GROUP_HEIGHT),
+    },
   },
   ...(framed
     ? {

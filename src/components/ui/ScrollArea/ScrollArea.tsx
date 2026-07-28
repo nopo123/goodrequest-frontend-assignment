@@ -7,7 +7,7 @@ import { ScrollAreaRoot } from './ScrollArea.styled';
 type ScrollAreaProps = {
   readonly children: ReactNode;
   readonly ariaLabel: string;
-  readonly maxHeight: number;
+  readonly maxHeight: number | string;
 };
 
 export const ScrollArea = ({ children, ariaLabel, maxHeight }: ScrollAreaProps) => (

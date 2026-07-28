@@ -16,9 +16,12 @@ import { getDonorFieldError } from '@/components/donation/DonationForm/errors';
 import { DonorFieldset } from '@/components/donation/DonorFieldset/DonorFieldset';
 import { ScrollArea } from '@/components/ui/ScrollArea/ScrollArea';
 import { useScrollIntoViewOnGrow } from '@/hooks/ui/useScrollIntoViewOnGrow';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 import type { DonationFormValues, DonorFormValues } from '@/types/donation';
 import type { TranslateFn } from '@/types/i18n';
 import { translateFieldError } from '@/utils/translateFieldError';
+
+import { DonorListSection, DonorStepRoot } from './DonorStep.styled';
 
 type DonorStepProps = {
   readonly t: TranslateFn;
@@ -52,10 +55,10 @@ export const DonorStep = ({
   const setLastDonorNode = useScrollIntoViewOnGrow(donorCount);
 
   return (
-    <Stack spacing={5}>
+    <DonorStepRoot spacing={SECTION_STACK_SPACING}>
       <Typography variant="h1">{t('donorStep.title')}</Typography>
 
-      <Stack spacing={2}>
+      <DonorListSection spacing={2}>
         <Typography variant="h4" component="h2">
           {t('donorStep.sectionTitle')}
         </Typography>
@@ -115,7 +118,7 @@ export const DonorStep = ({
             )}
           </Stack>
         </ScrollArea>
-      </Stack>
-    </Stack>
+      </DonorListSection>
+    </DonorStepRoot>
   );
 };

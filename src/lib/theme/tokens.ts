@@ -58,11 +58,24 @@ export const SPACING = {
   xl8: 80,
 } as const;
 
+export const FLUID_SPACING = {
+  pagePadding: 'clamp(10px, 1.5vh, 20px)',
+  sectionGap: 'clamp(16px, 3vh, 40px)',
+  contentPadding: 'clamp(16px, 3vh, 60px)',
+} as const;
+
+export const SECTION_STACK_SPACING = {
+  xs: `${SPACING.xl2 * 2}px`,
+  md: FLUID_SPACING.sectionGap,
+} as const;
+
 export const CONTENT_MAX_WIDTH = 1440;
 
 const SPLIT_LAYOUT_MIN_WIDTH = 1170;
 
 export const SPLIT_LAYOUT_MEDIA = `@media (min-width:${SPLIT_LAYOUT_MIN_WIDTH}px)`;
+
+export const COMPACT_HEIGHT_MEDIA = `@media (min-width:${BREAKPOINTS.laptop}px) and (max-height:800px)`;
 
 export const FONT_FAMILY =
   "var(--font-app-sans), 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif";

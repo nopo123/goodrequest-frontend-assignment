@@ -3,7 +3,7 @@ import InputBase from '@mui/material/InputBase';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
-import { COLORS, SPACING } from '@/lib/theme/tokens';
+import { COLORS, COMPACT_HEIGHT_MEDIA, SPACING } from '@/lib/theme/tokens';
 import { pxToRem } from '@/lib/theme/typography';
 
 const MIN_FIELD_WIDTH = 50;
@@ -32,6 +32,9 @@ export const NumberFieldRow = styled(Box, {
     hasError ? theme.palette.error.main : theme.palette.primary.main
   }`,
   transition: theme.transitions.create('border-color'),
+  [COMPACT_HEIGHT_MEDIA]: {
+    paddingBottom: theme.spacing(1),
+  },
 }));
 
 export const NumberFieldInput = styled(InputBase)(({ theme }) => ({

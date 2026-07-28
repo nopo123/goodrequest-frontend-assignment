@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import type { FormikErrors, FormikTouched } from 'formik';
 
+import { SUMMARY_LIST_MAX_HEIGHT } from '@/components/donation/DonationForm/constants';
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
 import {
   buildFullPhoneNumber,
@@ -13,7 +14,9 @@ import {
 } from '@/components/donation/DonationForm/payload';
 import { CheckboxField } from '@/components/ui/CheckboxField/CheckboxField';
 import { DefinitionList } from '@/components/ui/DefinitionList/DefinitionList';
+import { ScrollArea } from '@/components/ui/ScrollArea/ScrollArea';
 import { SectionDivider } from '@/components/ui/SectionDivider/SectionDivider';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 import { DonationType, type DonationFormValues } from '@/types/donation';
 import type { TranslateFn } from '@/types/i18n';
 import type { SheltersState } from '@/types/shelters';
@@ -94,7 +97,7 @@ export const SummaryStep = ({
   ]);
 
   return (
-    <Stack spacing={5}>
+    <Stack spacing={SECTION_STACK_SPACING}>
       <Typography variant="h1">{t('summaryStep.title')}</Typography>
 
       <Stack spacing={2}>
@@ -103,7 +106,12 @@ export const SummaryStep = ({
         </Typography>
 
         <Box>
-          <DefinitionList groups={[donationRows, donorRows]} />
+          <ScrollArea
+            maxHeight={SUMMARY_LIST_MAX_HEIGHT}
+            ariaLabel={t('summaryStep.sectionTitle')}
+          >
+            <DefinitionList groups={[donationRows, donorRows]} />
+          </ScrollArea>
 
           <SectionDivider />
 

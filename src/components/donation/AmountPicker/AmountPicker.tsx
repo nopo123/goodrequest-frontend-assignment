@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 
 import { NumberField } from '@/components/ui/NumberField/NumberField';
 import { ToggleGroupButtons } from '@/components/ui/ToggleGroupButtons/ToggleGroupButtons';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 import type { ToggleOption } from '@/types/ui';
 
 const MOBILE_PRESET_COLUMNS = 3;
@@ -49,7 +50,7 @@ export const AmountPicker = ({
   }));
 
   return (
-    <Stack spacing={5}>
+    <Stack spacing={SECTION_STACK_SPACING}>
       <NumberField
         id={id}
         name={name}

@@ -9,16 +9,21 @@ import {
   PrimaryColumn,
   SplitGrid,
 } from '@/components/ui/layout/layout.styled';
-import { CONTENT_MAX_WIDTH, SPACING, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
+import {
+  CONTENT_MAX_WIDTH,
+  FLUID_SPACING,
+  SPACING,
+  SPLIT_LAYOUT_MEDIA,
+} from '@/lib/theme/tokens';
 
-const FULL_HEIGHT = `calc(100vh - ${SPACING.xl2 * 2}px)`;
+const FULL_HEIGHT = `calc(100vh - (${FLUID_SPACING.pagePadding} * 2))`;
 
 type SplitLayoutProps = {
   readonly children: ReactNode;
   readonly aside?: ReactNode;
   readonly footer?: ReactNode;
   readonly asideWidth?: number;
-  readonly contentVerticalPadding?: number;
+  readonly contentVerticalPadding?: number | string;
 };
 
 export const SplitLayout = ({
@@ -26,7 +31,7 @@ export const SplitLayout = ({
   aside,
   footer,
   asideWidth,
-  contentVerticalPadding = SPACING.xl6,
+  contentVerticalPadding = FLUID_SPACING.contentPadding,
 }: SplitLayoutProps) => {
   const hasAside = aside !== undefined;
 
@@ -53,7 +58,10 @@ export const SplitLayout = ({
           xs: `${SPACING.xl2}px`,
           md: `${SPACING.xl8}px`,
         },
-        py: `${SPACING.xl2}px`,
+        py: {
+          xs: `${SPACING.xl2}px`,
+          md: FLUID_SPACING.pagePadding,
+        },
       }}
     >
       {hasAside ? (

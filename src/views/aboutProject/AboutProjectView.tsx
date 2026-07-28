@@ -10,6 +10,7 @@ import { ContributionStats } from '@/components/stats/ContributionStats/Contribu
 import { BackLink } from '@/components/ui/BackLink/BackLink';
 import { HOME_ROUTE } from '@/config/navigation';
 import { useContributionResults } from '@/hooks/stats/useContributionResults';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 import { formatCount, formatCurrency } from '@/utils/format';
 
 import { StatsBand } from './AboutProjectView.styled';
@@ -27,7 +28,7 @@ export const AboutProjectView = () => {
 
   return (
     <SplitLayout footer={<SiteFooter t={t} />}>
-      <Stack spacing={5}>
+      <Stack spacing={SECTION_STACK_SPACING}>
         <BackLink href={HOME_ROUTE} label={t('common.back')} />
 
         <Typography variant="h1">{t('about.title')}</Typography>

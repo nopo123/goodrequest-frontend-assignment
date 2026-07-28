@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 
-import { SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
+import { FLUID_SPACING, SPLIT_LAYOUT_MEDIA } from '@/lib/theme/tokens';
 
 const DEFAULT_ASIDE_WIDTH = 602;
 
@@ -33,7 +33,7 @@ export const SplitGrid = styled(Box, {
 }));
 
 type PrimaryColumnProps = {
-  readonly verticalPadding?: number;
+  readonly verticalPadding?: number | string;
 };
 
 export const PrimaryColumn = styled(Box, {
@@ -47,6 +47,7 @@ export const PrimaryColumn = styled(Box, {
   paddingTop: theme.spacing(3),
   paddingBottom: theme.spacing(3),
   [theme.breakpoints.up('md')]: {
+    gap: FLUID_SPACING.sectionGap,
     paddingTop: verticalPadding,
     paddingBottom: verticalPadding,
   },

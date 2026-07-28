@@ -14,6 +14,7 @@ import { BackLink } from '@/components/ui/BackLink/BackLink';
 import { IconCard } from '@/components/ui/IconCard/IconCard';
 import { LinkOrText } from '@/components/ui/LinkOrText/LinkOrText';
 import { HOME_ROUTE } from '@/config/navigation';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 
 import { ContactGrid, ContactImageFrame, ContactStack } from './ContactView.styled';
 
@@ -59,7 +60,7 @@ export const ContactView = () => {
 
   return (
     <SplitLayout footer={<SiteFooter t={t} />}>
-      <ContactStack spacing={5}>
+      <ContactStack spacing={SECTION_STACK_SPACING}>
         <BackLink href={HOME_ROUTE} label={t('common.back')} />
 
         <Typography variant="h1">{t('contact.title')}</Typography>

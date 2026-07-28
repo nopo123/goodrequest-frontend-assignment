@@ -15,6 +15,7 @@ import {
 } from '@/components/donation/DonationForm/constants';
 import { getDonationFieldError } from '@/components/donation/DonationForm/errors';
 import { parseAmount } from '@/components/donation/DonationForm/payload';
+import { SECTION_STACK_SPACING } from '@/lib/theme/tokens';
 import { DonationType, type DonationFormValues } from '@/types/donation';
 import type { TranslateFn } from '@/types/i18n';
 import type { SheltersState } from '@/types/shelters';
@@ -55,7 +56,7 @@ export const ShelterStep = ({
   const selectedPreset = AMOUNT_PRESETS.find((preset) => preset === parsedAmount) ?? null;
 
   return (
-    <Stack spacing={5}>
+    <Stack spacing={SECTION_STACK_SPACING}>
       <Typography variant="h1">{t('shelterStep.title')}</Typography>
 
       <ToggleGroupButtons<DonationType>

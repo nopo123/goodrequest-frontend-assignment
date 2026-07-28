@@ -6,7 +6,7 @@ import { COLORS, RADII } from '@/lib/theme/tokens';
 const SCROLLBAR_WIDTH = 8;
 
 type ScrollAreaRootProps = {
-  readonly areaMaxHeight: number;
+  readonly areaMaxHeight: number | string;
 };
 
 export const ScrollAreaRoot = styled(Box, {
@@ -15,6 +15,9 @@ export const ScrollAreaRoot = styled(Box, {
   maxHeight: areaMaxHeight,
   overflowY: 'auto',
   paddingRight: theme.spacing(1.5),
+  [theme.breakpoints.up('md')]: {
+    flexGrow: 1,
+  },
   scrollbarWidth: 'thin',
   scrollbarColor: `${COLORS.border} transparent`,
   '&::-webkit-scrollbar': {

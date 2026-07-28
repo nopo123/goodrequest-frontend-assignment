@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material/styles';
 import {
   BREAKPOINTS,
   COLORS,
+  COMPACT_HEIGHT_MEDIA,
   RADII,
   SHADOWS,
   SPACING,
@@ -83,6 +84,9 @@ export const muiTheme = createTheme({
         },
         sizeLarge: {
           padding: '14px 28px',
+          [COMPACT_HEIGHT_MEDIA]: {
+            padding: '10px 24px',
+          },
         },
         text: {
           color: COLORS.textPrimary,

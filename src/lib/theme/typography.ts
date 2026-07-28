@@ -1,7 +1,7 @@
 import type { TypographyVariantsOptions } from '@mui/material/styles';
 import type { CSSProperties } from 'react';
 
-import { BREAKPOINTS, COLORS, FONT_FAMILY } from './tokens';
+import { BREAKPOINTS, COLORS, COMPACT_HEIGHT_MEDIA, FONT_FAMILY } from './tokens';
 
 type ResponsiveFontSizes = {
   readonly sm?: number;
@@ -35,6 +35,7 @@ export const typography: TypographyVariantsOptions = {
     letterSpacing: '-0.3px',
     color: COLORS.textPrimary,
     ...responsiveFontSizes({ sm: 48, md: 60 }),
+    [COMPACT_HEIGHT_MEDIA]: { fontSize: pxToRem(40) },
   },
   h1: {
     fontWeight: 700,
@@ -43,6 +44,7 @@ export const typography: TypographyVariantsOptions = {
     letterSpacing: '-0.3px',
     color: COLORS.textPrimary,
     ...responsiveFontSizes({ sm: 40, md: 48 }),
+    [COMPACT_HEIGHT_MEDIA]: { fontSize: pxToRem(32) },
   },
   h2: {
     fontWeight: 700,

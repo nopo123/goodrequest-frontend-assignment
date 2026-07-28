@@ -23,7 +23,9 @@ export const LAST_NAME_MAX_LENGTH = 30;
 
 export const MAX_DONORS = 5;
 
-export const DONOR_LIST_MAX_HEIGHT = 440;
+export const DONOR_LIST_MAX_HEIGHT = 'clamp(240px, calc(100vh - 400px), 680px)';
+
+export const SUMMARY_LIST_MAX_HEIGHT = 'clamp(240px, 40vh, 440px)';
 
 export const DONATION_STEP_ORDER = [
   DonationStep.SHELTER,
