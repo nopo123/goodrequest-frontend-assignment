@@ -9,6 +9,10 @@ import type { TranslateFn } from '@/types/i18n';
 
 import { ActionsRow, BackButton } from './DonationFormActions.styled';
 
+const NEXT_BUTTON_KEY = 'next';
+
+const SUBMIT_BUTTON_KEY = 'submit';
+
 type DonationFormActionsProps = {
   readonly t: TranslateFn;
   readonly isBackDisabled: boolean;
@@ -49,11 +53,18 @@ export const DonationFormActions = ({
       )}
 
       {isSubmitStep ? (
-        <Button type="submit" variant="contained" size="large" loading={isSubmitting}>
+        <Button
+          key={SUBMIT_BUTTON_KEY}
+          type="submit"
+          variant="contained"
+          size="large"
+          loading={isSubmitting}
+        >
           {t('summaryStep.submit')}
         </Button>
       ) : (
         <Button
+          key={NEXT_BUTTON_KEY}
           type="button"
           variant="contained"
           size="large"
