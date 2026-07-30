@@ -6,3 +6,8 @@ export enum AppRoute {
 }
 
 export const DONATION_STEP_QUERY_PARAM = 'step';
+
+export type NavLinkType = {
+  readonly href: AppRoute;
+  readonly labelKey: string;
+};
