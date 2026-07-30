@@ -1,5 +1,6 @@
 'use client';
 
+import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +16,7 @@ import { SocialNetwork } from '@/types/social';
 import { FooterNav, FooterNavLink, FooterRow } from './SiteFooter.styled';
 
 const SOCIAL_ICONS = {
+  [SocialNetwork.FACEBOOK]: FacebookIcon,
   [SocialNetwork.INSTAGRAM]: InstagramIcon,
 } as const;
 
