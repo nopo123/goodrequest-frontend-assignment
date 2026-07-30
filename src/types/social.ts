@@ -1,5 +1,4 @@
 export enum SocialNetwork {
-  FACEBOOK = 'facebook',
   INSTAGRAM = 'instagram',
 }
 

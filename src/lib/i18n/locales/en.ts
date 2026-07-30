@@ -9,11 +9,6 @@ export const en: TranslationResource = {
     skipToContent: 'Skip to content',
     backToForm: 'Back to the form',
   },
-  nav: {
-    label: 'Main navigation',
-    contact: 'Contact',
-    about: 'About',
-  },
   stepper: {
     label: 'Form progress',
     shelter: 'Choose a shelter',

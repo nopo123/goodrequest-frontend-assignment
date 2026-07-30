@@ -7,11 +7,6 @@ export const sk = {
     skipToContent: 'Preskočiť na obsah',
     backToForm: 'Späť na formulár',
   },
-  nav: {
-    label: 'Hlavná navigácia',
-    contact: 'Kontakt',
-    about: 'O projekte',
-  },
   stepper: {
     label: 'Priebeh formulára',
     shelter: 'Výber útulku',
